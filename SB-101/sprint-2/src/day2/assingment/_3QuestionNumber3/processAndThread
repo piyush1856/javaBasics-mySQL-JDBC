@@ -1,0 +1,29 @@
+Differentiate between process and thread : 
+
+
+Multitasking:
+Multitasking is the process of executing multiple tasks simultaneously. We use multitasking to utilize the CPU.
+Multitasking can be achieved in two ways:
+
+
+
+
+1. Process-based Multitasking (Multiprocessing)
+2. Thread-based Multitasking (Multithreading)
+ 
+Process-based Multitasking (Multiprocessing):
+Each process has an address in memory. In other words, each process allocates a separate memory area.
+A process is heavy weight.
+The cost of communication between the process is high.
+Switching from one process to another requires some time for saving and loading registers, memory maps,
+updating lists, etc.
+
+
+
+Thread-based Multitasking (Multithreading):
+Threads share the same address space.(a thread is a part of a process)
+A thread is lightweight.
+The cost of communication between the thread is low.
+
+
+Note: At least one process is required for each thread.

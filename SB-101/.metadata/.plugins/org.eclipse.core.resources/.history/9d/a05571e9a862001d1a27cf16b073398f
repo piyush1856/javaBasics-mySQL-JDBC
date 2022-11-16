@@ -1,0 +1,31 @@
+package com.mgnrega;
+
+import java.io.*;
+import java.util.Scanner;
+
+import com.mgnrega.usecase.CreateGramPanchayatMemberUseCase;
+
+public class HitAndTry {
+	private static volatile Console cons;
+	public static void main(String[] args) throws IOException {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter PassWord");
+		
+		cons = System.console();
+//		
+//		char[] c = con.readPassword();
+//		String pass = String.valueOf(c);
+		
+		System.out.println(cons);
+		
+	  
+		
+		 
+		
+		
+		
+		
+	}
+
+}

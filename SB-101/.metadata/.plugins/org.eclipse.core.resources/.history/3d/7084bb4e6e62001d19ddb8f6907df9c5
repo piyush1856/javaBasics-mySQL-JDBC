@@ -1,0 +1,139 @@
+package com.mgnrega.main;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import com.mgnrega.custom.ConsoleColors;
+
+public class Main {
+	
+	public static void appOpening() throws InputMismatchException  {
+		
+
+		
+		try {
+			Scanner sc = new Scanner(System.in);
+			System.out.println(ConsoleColors.BROWN_BACKGROUND+ConsoleColors.WHITE_BOLD_BRIGHT+"Welcome to GRAM MGNREGA Application : "+ ConsoleColors.RESET);
+			System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+"Choose User Type from Below Option  : " + ConsoleColors.RESET);
+			System.out.println("Press 1 to logIn as BDO.");
+			System.out.println("Press 2 to logIn as Gram Panchayat Member.");
+			System.out.println("Press 3 to EXIT.");
+			String choice = sc.nextLine();
+		
+			if(choice.equals("1")) {
+				
+				System.out.println("bdo");
+				BdoMain bmain = new BdoMain();
+				Boolean result = bmain.bdoLogin();
+				
+				int countBdoLogin =1;
+				
+				while(!result) {
+					countBdoLogin++;
+					System.out.println(4-countBdoLogin +" Attempts remaining");
+					bmain.bdoLogin();
+					
+					if(countBdoLogin ==3) {
+						System.out.println("Maximum Limit Crossed : Try Again Later");
+						break;
+						
+					}
+				}
+				
+				if(result) {
+					
+					while(true) {
+						
+						bmain.bdoHomeWndow();
+						String choiceBdo = sc.nextLine();
+						
+						if(choiceBdo.equals("1")) {
+							bmain.createProject();
+						}else if(choiceBdo.equals("2")) {
+							bmain.viewListOfProject();
+						}else if (choiceBdo.equals("3")) {
+							bmain.createGPM();
+						}else if(choiceBdo.equals("4")){
+							bmain.viewListOfGPM();
+						}else if(choiceBdo.equals("5")){
+							bmain.allocateProjectToGPM();
+						}else if(choiceBdo.equals("6")){
+							bmain.listOfEmployee();
+						}else if(choiceBdo.equals("7")){
+							System.out.println("logout succesful");
+							break;
+						}else {
+							System.out.println("Choose correct Input");
+						}							
+					}
+					appOpening();
+						
+				}else {
+					appOpening();
+				}
+				
+			}else if(choice.equals("2")) {
+				System.out.println("gpm");
+				GpmMain gpmMain = new GpmMain();
+				Boolean result = gpmMain.GpmLogin();
+				
+				int countGpmLogin=1;
+				while(!result) {
+					countGpmLogin++;
+					System.out.println(4-countGpmLogin +" Attempts remaining");
+					gpmMain.GpmLogin();
+					
+					if(countGpmLogin ==3) {
+						System.out.println("Maximum Limit Crossed : Try Again Later ");
+						break;
+						
+					}
+				}
+				
+				if(result) {
+					
+					while(true) {
+						
+						
+						
+						
+						
+						
+						
+					}
+					
+					
+					
+					
+				}else {
+					appOpening();
+				}
+				
+				
+			}else if(choice.equals("3")) {
+				System.out.println("exit");
+				System.exit(0);
+				
+			}else {
+				System.out.println("Choose correct Input");
+				appOpening();
+				
+			}
+		
+			}catch (InputMismatchException e){
+				e.printStackTrace();
+			}
+		
+		
+	}
+	public static void main(String[] args) {
+		appOpening();
+		
+		
+		
+		
+	}
+		
+	
+
+}

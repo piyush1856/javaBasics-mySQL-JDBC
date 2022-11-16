@@ -1,0 +1,34 @@
+What are the benefits of using Multithreading?
+
+
+
+Advantages of Java Multithreading:
+1. It doesn't block the user because threads are independent and you can perform multiple operations at the
+same time.
+2. You can perform many operations together, so it saves time.
+3. Threads are independent, so it doesn't affect other threads if an exception occurs in a single thread.
+
+
+Some of application areas to apply multithreading:
+To develop multimedia graphics
+To develop animations
+To develop video games
+To develop Web Servers
+
+
+
+Process-based Multitasking (Multiprocessing):
+Each process has an address in memory. In other words, each process allocates a separate memory area.
+A process is heavy weight.
+Day14: Multithreading, Executor Framework 2
+The cost of communication between the process is high.
+Switching from one process to another requires some time for saving and loading registers, memory maps,
+updating lists, etc.
+
+
+
+
+Thread-based Multitasking (Multithreading):
+Threads share the same address space.(a thread is a part of a process)
+A thread is lightweight.
+The cost of communication between the thread is low.

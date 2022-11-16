@@ -1,0 +1,25 @@
+package com.mgnrega;
+
+import java.io.*;
+import java.io.IOException;
+import java.util.Scanner;
+
+import com.mgnrega.usecase.CreateGramPanchayatMemberUseCase;
+
+public class HitAndTry {
+	
+	public static void main(String[] args) throws IOException {
+		
+		CreateGramPanchayatMemberUseCase abc = new CreateGramPanchayatMemberUseCase();
+		abc.createGramPanchayatMember();
+		
+	  
+		
+		 
+		
+		
+		
+		
+	}
+
+}

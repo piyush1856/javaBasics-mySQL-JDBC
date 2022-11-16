@@ -1,0 +1,47 @@
+package day3.liveClass.FunctionalApplication;
+
+public class _1FunctionalApplication {
+	/*
+	 * Some functional Interface in JAVA to perform functional programming :
+	 * 
+	 * these Interface belongs to "java.util.function" package
+	 * 
+	 * 1. Predicate(I);
+	 * 2. Consumer(I);
+	 * 3. Supplier(I);
+	 * 4. Function(I);
+	 * 
+	 * These interfaces are generic type : 
+	 *  1. Predict<T> : 
+	 *  		This Interface has only one abstract method :
+	 *  			public Predicate<T> {
+	 *  				public boolean test(T t);
+	 *  			};
+	 *  			This test method checks whether supplied object id satisfying a condition or not.
+	 *  			eg : test a Student if marks >=800
+	 *  
+	 *  	--From java 1.8 onwards inside the Collection interface one new method is added
+			called:
+
+			public boolean removeIf(Predicate filter);
+
+			--based on the condition of Predicate , this method will remove/filter the elementts
+			from the any type of Collection object.
+	 *  
+	 *  2. Consumer<T> :
+	 *  		public abstract void accept(T t);
+	 *  		accept This method accept  object of generic type and doesn't return anything
+	 * 			
+	 * 			forEach method :  public void forEach(Consumer action); // action for each element of a collection
+	 * 			this method we can call from any collection object
+	 * 
+	 * 3. java.util.function.Supplier <T> :
+	 * 			public abstract T get();
+	 * 			
+	 * 
+	 * 4. java.util.function.Function<T,R>:
+	 * 			public R apply (T t);
+	 * 			example :getting student object and returning the result of tha student if marks is greater than500
+	 * 					then return Pass otherwise return Fail.
+	 * */
+}

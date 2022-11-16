@@ -1,0 +1,13 @@
+package com.mgnrega.dao;
+
+import com.mgnrega.exception.CredentialException;
+
+public interface BdoInterface {
+	
+	public final String username = "bdo";
+	public final String password = "Bdo@1234";
+	
+	public String bdologin(String username, String password) throws CredentialException;
+	
+
+}

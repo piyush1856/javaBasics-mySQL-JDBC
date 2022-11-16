@@ -1,0 +1,55 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sb101db            |
+| sys                |
++--------------------+
+5 rows in set (0.02 sec)
+
+mysql> create database s1day1Assingment
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use s1day1assingment;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create table DEPOSIT(actno varchar(25), cname varchar(20),
+    -> bname varchar(20),amount int,ADATE date);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table branch(bname varchar(20), city varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table customer(cname varchar2(20), city varchar2(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar2(20), city varchar2(20))' at line 1
+mysql> create table customer(cname varchar(20), city varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table DEPOSIT(actno varchar(25), cname varchar(20),
+    -> show databas
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databas' at line 2
+mysql> create table borrow(loanno varchar(5), cname varchar(20),
+    -> bname varchar(20), amount int);
+Query OK, 0 rows affected (0.01 sec)

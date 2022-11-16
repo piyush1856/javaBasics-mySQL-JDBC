@@ -1,0 +1,18 @@
+package com.mgnrega.main;
+
+import com.mgnrega.usecase.GPMLoginUseCase;
+
+public class GpmMain {
+	public static void main(String[] args) {
+		
+		GPMLoginUseCase login = new GPMLoginUseCase();
+		login.gpmLogin();
+		
+		
+		
+		
+		
+		
+		
+	}
+}

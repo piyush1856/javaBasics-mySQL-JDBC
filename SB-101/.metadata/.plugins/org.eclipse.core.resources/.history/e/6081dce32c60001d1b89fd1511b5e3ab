@@ -1,0 +1,28 @@
+package com.mgnrega;
+
+import java.io.Console;
+import java.util.Scanner;
+
+public class HitAndTry {
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		
+		
+		Console c=System.console();    
+		    
+		char[] ch=c.readPassword(); 
+		if(c== null) {
+			System.out.println("Enter password: ");
+		}
+		String pass=String.valueOf(ch);//converting char array into string    
+		System.out.println("Password is: "+pass); 
+		
+		
+		
+		
+	}
+
+}

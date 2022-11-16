@@ -1,0 +1,25 @@
+It is a simplified form (short-cut ) of Lambda Expression.
+Java provides a new feature called method reference in Java 8. Method reference is used to refer method
+of functional interface. It is compact and easy form of lambda expression.
+Instead of creating a Lambda Expression with all the details, with the help of method reference we can
+refer an existing class.
+
+
+
+Types of Method References:
+There are following types of method references in java:
+1. Reference to a static method.
+		 example : refer to solution of Question Number 2 of this assignment.
+		 		
+2. Reference to an instance (non-static) method.
+		 example : 
+		 	_10MethodreferanceDemo d1 = new _10MethodreferanceDemo("just to resolve constructor");
+			_11InterfaceForMR i2 = d1 :: fun2;
+			i2.sayHello("Welcome");
+			
+3. Reference to a constructor.
+		 example : 
+		 	_11InterfaceForMR i3 = _10MethodreferanceDemo :: new;
+			i3.sayHello("Constructor calling reference");
+
+

@@ -1,0 +1,8 @@
+package com.mgnrega.exception;
+
+public class ProjectException extends Exception{
+
+	
+	
+	
+}

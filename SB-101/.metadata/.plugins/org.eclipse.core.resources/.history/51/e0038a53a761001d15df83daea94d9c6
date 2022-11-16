@@ -1,0 +1,41 @@
+package com.mgnrega.main;
+
+import java.util.Formatter;
+
+import com.mgnrega.exception.CredentialException;
+import com.mgnrega.usecase.BdoLoginUseCase;
+import com.mgnrega.usecase.CreateGramPanchayatMemberUseCase;
+import com.mgnrega.usecase.CreateProjectUseCase;
+import com.mgnrega.usecase.DisplayAllGramPayanchayatMemberUseCase;
+import com.mgnrega.usecase.DisplayAllProjectUseCase;
+
+public class BdoMain {
+	
+	public static void main(String[] args) {
+		
+//		BdoLoginUseCase login = new BdoLoginUseCase();
+//		login.bdoLogin();
+		
+//		CreateProjectUseCase createProject = new CreateProjectUseCase();
+//		createProject.createProject();
+		
+//		DisplayAllProjectUseCase projects = new DisplayAllProjectUseCase();
+//		projects.displayProject();
+		
+//		CreateGramPanchayatMemberUseCase createGPM = new CreateGramPanchayatMemberUseCase();
+//		createGPM.createGramPanchayatMember();
+		
+		DisplayAllGramPayanchayatMemberUseCase gpmList = new DisplayAllGramPayanchayatMemberUseCase();
+		gpmList.displayAllGPM();
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}

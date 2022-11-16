@@ -1,0 +1,315 @@
+ 
+ JAVA : It is mostly used to develop a Business Application
+ 
+ Business Application : 
+ 
+ Business Organization : main objective for any Business organization is Profit.
+ 	1. Small Scale Business Organization -> Shop, Gas Station etc
+ 	2. Large Scale  :  HDFC Bank, SBI, Mastercard, Pepsico etc
+ 				-> Enterprise
+ 				-> These business organization provides their services ti the client/customer, and to computerize those services whatever
+ 				   computer application we develop is known as Business Application.
+ 				   
+ 				   
+ Common General Things in any business organization :
+ 	
+ 	1. Storing and maintaining business data in a secure and easily accessible manner.
+ 	2. Processing that data according to the business rule.
+ 	3. Presenting the data in user-understandable format.
+ 	 
+ 	 
+ Note : In real-time application we keep/maintain business data inside RDBMS s/w
+ 
+ Data : It is collection of raw and isolated facts.
+ 
+ Information : When we process the data, then we get meaningful information/result.
+ 
+ Data store : It is a store where we can store or keep our business related data.
+  	 	 		 ->	normal book and files
+  	 	 		 -> flat file in computer (notepad, word file)
+  	 	 		 			- problem of data maintainace
+  	 	 		 			- data redundency
+  	 	 		 			- data integrity/ inconsistence
+  	 	 		 			- security
+  	 	 		 			- data retrival
+  	 	 		 			
+  	 	 		 			to overcome these problem we need to store the data in the DBMS s/w RDBMS software
+  	 	 		 			
+ 				 
+ 				 -> Database : It is organized collection of interrelated data or structured collection of data.
+ 				 
+ 
+ DBMS : It is a type of software there we can manage multiple database.
+ 
+ RDBMS : It is also a software which follow a relational model. In this model data is stored in 2-D table.	
+ 		we have multiple RDBMS software are their : mySQL software (Oracle Corporation)		
+ 													Oracle software
+ 													Postgres
+ 													sql-server (MicroSoft)
+ 													DB2 (IBM)
+ 													etc ..
+ 
+ RDBMS is an extension of DBMS software.
+ 
+ 
+ 
+ --> MONgoDB : json, nosql : medium level : not a RDBMS but DBMS
+ every RDBMS is a DBSM but reverse is not true.  ex - mongoDM
+ _______________________________________________________________________________________________________________________________________________
+ 
+ 
+SQL: 
+------
+
+--In order to work with RDBMS we need to use SQL (structured query language),
+it is an interface by using which we can work with any kind of RDBMS s/w.
+
+Note: Whenever we install any RDBMS s/w then at physical level (in harddisk ) some databases will be created automatically, 
+
+***Each RDBMS s/w has one main component is there which is called as 
+"Database engine". which will execute the sql commands.
+
+--to execute any sql command with Database engine we need a client application:
+
+--along with the mysql installation we get the mysql command line client, from where
+we can execute any type sql with database engine.
+
+--we can install some GUI client for mysql as well for example, mysql-workbench
+
+
+
+
+--sql is a case insensetive language. but some reservered keywords are case sensitive(user, table,  ).
+
+--sql language is a collection of predefined commands.
+
+these commands are categoriesed into following category:
+
+1. DDL (Data defination language) 
+(create, alter, drop, truncate, rename)
+
+2.DML (data manipulation language)
+(insert, update, delete)
+
+3.DRL (Data retrival language)
+(select)
+
+4. TCL (Transaction control language)
+(commit, rollback, savepoint)
+
+5.DCL (Decision control language)
+(grant, revoke)
+
+
+
+
+>show databases;
+
+--to list out all the databases in our mysql
+
+>create database web20sb101db;
+
+--after creating the db inside the mysql rdbms s/w we need to move inside that DB.
+
+>use web20sb101db;
+
+>show tables;
+
+> create table student(roll int,name varchar(12),marks int);
+
+>drop table student; 
+
+>create table student
+(
+roll int,
+name varchar(12),
+marks int
+);
+
+
+>desc student;
+
+
+
+1. DDL (Data defination language) 
+(create, alter, drop, truncate, rename)
+===============================
+
+datatypes in mysql:
+-------------------------
+
+1.numerics types:
+
+2.string types
+
+3.date and time types
+
+
+1.numerics types:
+----------------------
+tinyint : 1byte
+smallint: 2 byte
+mediumint: 3 byte
+int : 4 byte
+bigint: 8byte
+
+floating point:
+----------------
+
+float(6,2): the column can store 6 digit with 2 decimal places
+
+2 string types:
+-------------------
+
+1. char : fixed length of string range bt 0 to 255 char
+
+2.varchar : variable length of argument bt 1 to 65500, here we must define the 
+length.
+
+
+char(4)
+varchar(4)
+
+value        char(4)       storage_requited
+
+'a'     -----------------> 4 bytes
+
+'ab'  -----------------> 4 bytes
+
+'abcdef' -------------> error, data is too long
+
+
+	
+value        varchar(4)       storage_requited
+
+'a'     -----------------> 1 bytes
+
+'ab'  -----------------> 2 bytes
+
+'abcdef' -------------> error, data is too long
+
+
+Note: in the term of efficiency, if we r storing with variable length of argument then we should use varchar, and it the length is always fixed then we should use char, here char is slightly faster than varchar.
+
+
+3. date and time:
+-------------------
+
+a. date : yyyy-mm-dd
+b. datetime: yyyy-mm-dd hh:mm:ss
+
+
+2. alter :
+----------
+
+--it is used to change the structure of the existing table.
+
+--this command having 4 sub-commands:
+
+1. add
+2. modify
+3. drop
+4. change
+
+
+a. add: it is used to add a new column in the existing table.
+ex:-  alter table student add address varchar(15); 
+>alter table student add address varchar(15);
+
+b. modify : it is used to change the column datatype or size.
+ex: alter table student modify address varchar(20); --> can change size a well as data type
+>alter table student modify address varchar(20);
+
+
+c. drop: to drop a single or multiple columns from a table.
+ex: alter table student drop column address;
+>alter table student drop column address;
+
+d. change: to rename a column.
+ex:alter table student change FullName name varchar(12);
+>alter table student change name sname varchar(12);
+
+
+
+
+
+
+3. drop :
+=======
+
+--to drop/delete the entire table from the database.
+
+>drop table student;
+
+Note : This table cannot be rolled back.
+
+
+
+
+4.truncate :
+=========
+
+--this command is used to truncate/clean all the rows/recored from the table
+permanently.(Here table structure will not be deleted)
+
+Note: all the DDL  command can not be rolledback.
+
+
+5. rename:
+========
+
+--it is used to rename a table.
+
+ex:
+
+>rename table student to student1;
+
+
+2.DML (data manipulation language)
+(insert, update, delete)
+===============================
+
+>select * from student;  // getting all the columns and all the rows from a table
+
+1. insert :
+========
+
+--inserting the record in the table:
+
+inserting all the column values:
+
+>insert into student values(10, 'Ram', 850);
+
+inserting partial column values:
+
+>insert into student values(13, 'manoj',null);
+
+or
+
+> insert into student(roll,marks) values(22, 600);
+ 	
+ 	
+ 
+ 
+ 														 
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 				 	 	 		 				   	
+ 

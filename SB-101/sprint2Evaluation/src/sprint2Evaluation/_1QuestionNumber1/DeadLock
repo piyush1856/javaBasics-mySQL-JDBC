@@ -1,0 +1,16 @@
+
+Deadlock : 
+	
+	This is situation when two or more thread sharing same object/class and preventing each other from accessing the resource by hold the key and not releasing it.
+	
+	
+	
+	1. A lock without a key is called deadlock.
+	2. When two thread keeps on waiting for Infinity time to execute and they don't have key of a object/class,
+		this situation is called deadlock.
+	3.	The synchronized keyword lead to deadlock when the above stated condition arrives
+	4. The solution of deadlock is not provided in java but, their are some preventions,
+		eg. removing synchronized keyword from any of the method.
+		
+		
+		Please refer to the example class file for reference in this Package : 

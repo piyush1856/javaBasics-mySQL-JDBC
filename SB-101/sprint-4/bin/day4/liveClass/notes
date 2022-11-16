@@ -1,0 +1,57 @@
+Jdbc with DAO pattern:
+
+--all the DB related opeatations inside a reusable methods.
+
+-- list out all the operations inside one or more interfaces.
+
+
+create table student
+(
+roll int primary key auto_increment,
+name varchar(12) not null,
+address varchar(12),
+email varchar(15) unique,
+password varchar(12)
+);
+
+
+create table course
+(
+cid int primary key auto_increment,
+cname varchar(12),
+fee int,
+duration varchar(12)
+);
+
+create table student_course
+(
+cid int,
+roll int,
+foreign key(cid) references course(cid),
+foreign key(roll) references student(roll)
+);
+
+
+	private int roll;
+	private String sname;
+	private String email;
+	private String address;
+	
+	private String cname;
+	private String duration;
+	
+	
+
+>select s.roll,s.name,s.email,s.address, c.cname, c.duration from student s INNER JOIN course c INNER JOIN student_course sc ON s.roll = sc.roll AND c.cid = sc.cid AND c.cname = ?
+
+
+
+
+
+
+
+
+
+
+
+

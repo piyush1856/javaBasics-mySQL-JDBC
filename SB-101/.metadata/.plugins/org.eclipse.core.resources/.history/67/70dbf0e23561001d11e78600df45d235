@@ -1,0 +1,15 @@
+package com.mgnrega.exception;
+
+public class GramPanchayat extends Exception{
+
+	public GramPanchayat() {
+		super();
+	
+	}
+
+	public GramPanchayat(String message) {
+		super(message);
+	
+	}
+
+}

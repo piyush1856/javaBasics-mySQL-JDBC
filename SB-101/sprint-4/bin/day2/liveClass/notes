@@ -1,0 +1,686 @@
+static and non-static block in java class:
+===============================
+
+A.java:
+--------
+
+package com.masai;
+
+public class A {
+	
+	{
+		System.out.println("inside non-static block");
+	}
+	
+	static{
+		System.out.println("inside static block");
+	}
+	
+	
+	public A() {
+		System.out.println("inside constructor of A");
+	}
+	
+	public void funA() {
+		System.out.println("inside funA of A");
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		System.out.println("inside main method");
+		
+		A a1= new A();
+		a1.funA();
+		
+	}
+
+}
+
+--static blocks will be executed before the main method of our application.
+--as soon as our application loaded into the memory, static blocks will be 
+exectuted.
+
+--whenever we try to create object of a class, then constructor of that class 
+will be executed, but before executing the constructor if any non-static 
+blocks are there then those blocks will be executed.
+
+--non-static blocks will never execute if we don't create object.
+
+--if some common code is required for multiple overloaded constructor then 
+instead of repeating those common code in multiple constructor, we can
+place those codes inside the non-static block.
+
+
+example 2:
+
+A.java:
+----------
+
+package com.masai;
+
+public class A {
+	
+	
+	static{
+
+		System.out.println("inside static block of A");
+		//we can write any type of code inside static block		
+		A a1=new A();
+		
+		a1.funA();
+		
+	}
+	
+		
+	public void funA() {
+		System.out.println("inside funA of A");
+	}
+	
+	
+	
+
+}
+
+
+Demo.java:
+--------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		try {
+			Class.forName("com.masai.A");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+
+
+
+--When forName() method of our Jdbc application executes, 3 things 
+happens in the background.
+
+1. Driver related main class will be loaded into the primary memory.
+
+2. Driver related main class object will be created.
+
+3. that driver object will be registered with the DriverManager class.
+
+
+ex:
+
+
+
+		try {
+		com.mysql.cj.jdbc.Driver d = new Driver();
+		
+		DriverManager.registerDriver(d);
+		
+		
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+
+--the above logic is written inside the static block of every Driver class.
+
+
+--from Java 1.6 onwards, no need to load Driver class into the memory it is 
+optional(but recomended to have).
+
+Inserting record into the table using Java Application:
+==========================================
+
+--once we get the Connection object then we can execute any sql statement from our java application to the DB server.
+
+--for that we require a "java.sql.Statement(I)" object.
+
+--We get the Statement object by using:
+
+Statement st=  conn.createStatement();
+
+
+--Once we get the Statement object, in order to execute any sql statement from our Java application we need to use one of the following methods of Statement object.
+
+1. public int executeUpdate(String dml)throws SQLException //(insert, update,delete)
+
+2.public ResultSet executeQuery(String drl)throws SQLException // (select)
+
+3. public boolean execute(String anysql)throws SQLException //even ddl also
+
+
+
+Demo.java:
+---------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.jdbc.Driver;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		//Loading the Driver related main class into the memory
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try {
+			Connection conn=  DriverManager.getConnection(url,"root","root");
+			
+			Statement st= conn.createStatement();
+			
+			int x= st.executeUpdate("insert into student values(10,'Ram',780)");
+			
+			if(x > 0)
+				System.out.println(x+" recored inserted sucessfully..!");
+			else
+				System.out.println("insertion fails..");
+			
+			
+			
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}
+
+closing the connection solution 1:
+-----------------------------------------
+
+Demo.java:
+--------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.jdbc.Driver;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		//Loading the Driver related main class into the memory
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		Connection conn = null;
+		
+		try {
+			conn=  DriverManager.getConnection(url,"root","root");
+			
+			Statement st= conn.createStatement();
+			
+			int x= st.executeUpdate("insert into student values(10,'Ram',780)");
+			
+			if(x > 0)
+				System.out.println(x+" recored inserted sucessfully..!");
+			else
+				System.out.println("insertion fails..");
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}
+
+
+Closing the connection solution 2:
+-------------------------------------------
+
+--from Java 1.7 onwards we can use try with resource to close the connection.
+
+Demo.java:
+--------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.jdbc.Driver;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		//Loading the Driver related main class into the memory
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		
+		try (Connection conn=  DriverManager.getConnection(url,"root","root")){
+			
+			
+			Statement st= conn.createStatement();
+			
+			int x= st.executeUpdate("insert into student values(10,'Ram',780)");
+			
+			if(x > 0)
+				System.out.println(x+" recored inserted sucessfully..!");
+			else
+				System.out.println("insertion fails..");
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}
+
+
+Using Statement obj inserting dynamic details in the table:
+===============================================
+
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import com.mysql.cj.jdbc.Driver;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Scanner sc= new Scanner(System.in);
+		
+		System.out.println("Enter Roll :");
+		int roll= sc.nextInt();
+		
+		System.out.println("Enter Name :");
+		String name= sc.next();
+		
+		System.out.println("Enter Marks :");
+		int marks= sc.nextInt();
+		
+		
+		
+		
+		
+		
+		//Loading the Driver related main class into the memory
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		
+		try (Connection conn=  DriverManager.getConnection(url,"root","root")){
+			
+			
+			Statement st= conn.createStatement();
+			
+			int x= st.executeUpdate("insert into student values("+roll+",'"+name+"',"+marks+")");
+			
+			if(x > 0)
+				System.out.println(x+" recored inserted sucessfully..!");
+			else
+				System.out.println("insertion fails..");
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}
+
+
+Note: If we use the Statement(I) object to perform any DB opearation then
+the Statement object has the following limitaitons:
+
+1. complexities to concatenate the dynamic variables.
+
+2. whenever we pass any query to the DB using Statement obj, DB engine will
+perform following tasks every time to execute that query.
+
+a. query compilation
+b. query plan generatation
+c. query optamization
+
+
+--for the same query doing these operations every time, it will degrade the performance.
+
+--to tell the DB engine to perform above 3 task only at the first time with the value
+or without the value(in case of without the value, make use of placeholders ?)
+ and put that query inside the cache, next time onwards just add the dynamic 
+values and execute the query.
+
+3. SQL injection  
+
+
+
+--for that we need to use "java.sql.PreparedStatement" object instead of 
+"java.sql.Statement" object.
+
+
+java.sql.Statement(I)
+                |
+java.sql.PreparedStatement(I)
+
+Note: Statement is relatively faster than PreparedStatement.
+
+
+--to get the PreparedStatement object we need to call 
+"prepareStatement(String sql)" method on the Connection object, with the
+value or without the value.
+
+--in case of without the value, we need to use placeholders (?)
+
+ex:
+
+
+PreparedStatement ps=  conn.prepareStatement("insert into student values(40,'mukesh', 900)");
+
+PreparedStatement ps=  conn.prepareStatement("insert into student values(?,?,?)");
+
+
+--In case of Placeholders, before executing the query we need to bind the appropriate
+values to the corresponding placeholders by calling variaous types of 
+setXXX(--) methods on the PreparedStatement object.
+
+
+ex:
+
+ps.setInt(1, 50);
+ps.setString(2,"Amit");
+ps.setInt(3,680);
+
+
+--after binding the appropriate placeholders we need to execute the query by using one of the following methods of the PreparedStatement object.
+
+public int executeUpdate();   // if dml 
+
+public ResultSet executeQuery() // if drl 
+
+public boolean execute(); // any type of sql
+
+
+example : using PreparedStatement:
+===========================
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import com.mysql.cj.jdbc.Driver;
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Scanner sc= new Scanner(System.in);
+		
+		System.out.println("Enter Roll :");
+		int roll= sc.nextInt();
+		
+		System.out.println("Enter Name :");
+		String name= sc.next();
+		
+		System.out.println("Enter Marks :");
+		int marks= sc.nextInt();
+		
+		
+		
+		
+		
+		
+		//Loading the Driver related main class into the memory
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		
+		try (Connection conn=  DriverManager.getConnection(url,"root","root")){
+			
+			
+			PreparedStatement ps= conn.prepareStatement("insert into student values(?,?,?)");
+			
+			ps.setInt(1, roll);
+			ps.setString(2, name);
+			ps.setInt(3, marks);
+			
+			int x= ps.executeUpdate();
+			
+			
+			if(x > 0)
+				System.out.println("recored inserted successfully..!");
+			else
+				System.out.println("fails...");
+			
+			
+			
+			
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}
+
+
+Update a record:
+=============
+
+//Giving 50 grace marks to all the students whose marks is less than 800
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UpdateStudent {
+	
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the Grace marks :");
+		int gmarks= sc.nextInt();
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try( Connection conn= DriverManager.getConnection(url,"root","root") ) {
+			
+			
+			PreparedStatement ps= conn.prepareStatement("update student set marks = marks + ? where marks < 800");
+			
+			ps.setInt(1, gmarks);
+			
+			int x= ps.executeUpdate();
+			
+			if(x > 0)
+				System.out.println(x+ " rocords are updated successfully");
+			else
+				System.out.println(" No record updated..");
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+
+
+Deletion example:
+==============
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class DeleteStudent {
+	
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter Roll to delete the student:");
+		int roll= sc.nextInt();
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try( Connection conn= DriverManager.getConnection(url,"root","root") ) {
+			
+			
+			PreparedStatement ps= conn.prepareStatement("delete from student where roll = ?");
+			
+			ps.setInt(1, roll);
+			
+			int x= ps.executeUpdate();
+			
+			if(x > 0)
+				System.out.println(x+" record deleted successfully..");
+			else
+				System.out.println("No record deleted..");
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	
+	}
+
+}
+
+
+
+
+

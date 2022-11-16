@@ -1,0 +1,19 @@
+package com.mgnrega.usecase;
+
+import java.util.Scanner;
+
+public class CreateProjectUseCase {
+	
+	public static void createProject() {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println();
+		
+		
+		
+	}
+	
+	
+	
+
+}

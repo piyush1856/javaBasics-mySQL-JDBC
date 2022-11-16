@@ -1,0 +1,40 @@
+package com.mgnrega.usecase;
+
+import java.util.Scanner;
+
+public class BdoLoginUseCase {
+	
+	public static boolean bdoLogin() {
+			
+		
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Username : ");
+		String username = sc.next();
+		System.out.println("Enter Password : ");
+		String password = sc.next();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return false;
+		
+		
+		
+		
+	}
+
+}

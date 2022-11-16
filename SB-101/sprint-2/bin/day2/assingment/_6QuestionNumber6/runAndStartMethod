@@ -1,0 +1,35 @@
+What if we call Java run() method directly instead start() method?
+
+X x1=new X();
+x1.run();//it will be called as a normal method as it is extended and overridden form Thread class in Main class. (By rules of Inheritance)
+x1.start();//here second thread will start
+
+Note:-weather we extends Thread class or implement Runnable interface directly, we have to use run()
+method of the Runnable interface.
+
+
+Here functionality of the start() method is to pick the run() method present in the object on which the start() method is
+called and to handover this run() method to the thread-scheduler for the Scheduling.
+Control will be in the main() method and other statements of main() will be executed simultaneously along with run()
+method.
+Since both the threads are getting executed simultaneously, the start/end execution of a thread completely depends
+on the time slice allocated for each method thread
+Because of scheduling we can't guess the output of the above application.
+
+
+
+Responsibility of start() method of Thread class:
+The start() method present in the Thread class is responsible to perform all the mandatory activity which are required
+for our thread. (like, registering our thread with the Thread-scheduler, performing all the low level task to start a
+separate flow of execution. and then calling the run() method).
+Hence without executing thread class start() method there is no chance of starting new thread in Java.
+After starting a thread we are not allowed to restart the same thread once again otherwise we will get a runtime
+exception called IllegalThreadStateException.
+
+If we extends Thread class to create a new thread then we loose the chance of Object Orientation biggest advantage
+of inheritance i.e. we cannot extends another class simultaneously
+To solve the above problem, we use the Runnable interface, so we take a separate class by implementing Runnable
+interface and overrides the run() method and inside the run() method define the functionality which we want to
+execute as a separate thread,
+then supply the object of that class to the Thread class constructor and create Thread class object and start that
+thread.

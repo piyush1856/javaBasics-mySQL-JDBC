@@ -1,0 +1,23 @@
+package com.mgnrega.main;
+
+import com.mgnrega.usecase.BdoLoginUseCase;
+import com.mgnrega.usecase.CreateProjectUseCase;
+
+public class BdoMain {
+	
+	public static void main(String[] args) {
+		
+//		BdoLoginUseCase login = new BdoLoginUseCase();
+//		login.bdoLogin();
+		
+		CreateProjectUseCase createProject = new CreateProjectUseCase();
+		createProject.createProject();
+		
+		
+		
+		
+		
+		
+		
+	}
+}

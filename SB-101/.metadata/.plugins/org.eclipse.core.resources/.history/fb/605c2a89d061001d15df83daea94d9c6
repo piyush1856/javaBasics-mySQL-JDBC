@@ -1,0 +1,28 @@
+package com.mgnrega.main;
+
+import com.mgnrega.usecase.CreateEmployeeUseCase;
+import com.mgnrega.usecase.DisplayAllEmployeeUseCase;
+import com.mgnrega.usecase.GPMLoginUseCase;
+
+public class GpmMain {
+	
+	public static void main(String[] args) {
+		
+		GPMLoginUseCase login = new GPMLoginUseCase();
+		boolean res =login.gpmLogin();
+		//int x= GPMLoginUseCase.gpmID;
+		
+//		CreateEmployeeUseCase createEmp = new CreateEmployeeUseCase();
+//		createEmp.createEmployee();
+//		
+		
+//		DisplayAllEmployeeUseCase displayEmp = new DisplayAllEmployeeUseCase();
+//		displayEmp.displayEmployee();
+		
+		
+		
+		
+		
+		
+	}
+}

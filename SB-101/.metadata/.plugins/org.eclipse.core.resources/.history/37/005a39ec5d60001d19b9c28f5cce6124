@@ -1,0 +1,30 @@
+package com.mgnrega;
+
+import java.io.*;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class HitAndTry {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Email");
+		String email = sc.nextLine();
+		System.out.println("password :");
+		Console con = System.console();
+		char[] chars = con.readPassword();
+		String password = new String(chars);
+		
+		System.out.println("done");
+		
+		
+		
+		 
+		
+		
+		
+		
+	}
+
+}

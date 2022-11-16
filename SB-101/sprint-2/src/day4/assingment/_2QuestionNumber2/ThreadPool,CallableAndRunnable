@@ -1,0 +1,29 @@
+Java Thread Pool : 
+Java Thread pool represents a group of worker threads that are waiting for the job and reused many times.
+
+In the case of a thread pool, a group of fixed-size threads is created. A thread from the thread pool is 
+pulled out and assigned a job by the service provider. After completion of the job, the thread is contained in the thread pool again.
+Better performance It saves time because there is no need to create a new thread.
+
+
+create a thread pool of 4 threads : ExecutorService service = Executors.newFixedThreadPool(3);
+
+
+Callable : 
+1. If a Thread returns anything
+2. only one method public Object call() throws Exception
+3. return type is Object
+4. not required to use try-catch
+5. Belongs to java.util.concurrent package
+6. from java 1.5 version
+
+Runnable : 
+1. If a thread won't returns anything. 
+2. only one method public void run()
+3. return type void 
+4. if any exception raise compulsory we need to handle within try catch
+5. Belongs to java.lang package
+6. from java 1.0 versio
+
+
+

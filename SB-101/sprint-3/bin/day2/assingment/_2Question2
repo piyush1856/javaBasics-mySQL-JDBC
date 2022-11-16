@@ -1,0 +1,344 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW S1DAY2ASSINGMENT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S1DAY2ASSINGMENT' at line 1
+mysql> USE S1DAY2ASSINGMENT;
+Database changed
+mysql> SHOW TABLES;
++----------------------------+
+| Tables_in_s1day2assingment |
++----------------------------+
+| customers                  |
+| orders                     |
++----------------------------+
+2 rows in set (0.03 sec)
+
+mysql> SELECT * FROM CUSTOMERS;
++-------------+------------+-----------+---------------+------------+-----------+-------+----------+
+| customer_id | first_name | last_name | email         | address    | city      | state | zip_code |
++-------------+------------+-----------+---------------+------------+-----------+-------+----------+
+|           1 | abc        | a         | abc@gmail.com | 1st street | chennai   | TN    | 60001    |
+|           2 | efg        | e         | efg@gmail.com | 2nd street | Bangalore | KA    | 50002    |
+|           3 | ijk        | i         | ijk@gmail.com | 3nd street | Mumbai    | MH    | 40002    |
++-------------+------------+-----------+---------------+------------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM ORDERS;
++----------+-------------+-------------------+
+| order_id | customer_id | order_placed_date |
++----------+-------------+-------------------+
+|        1 |           1 | 2016-11-11        |
+|        2 |           1 | 2016-10-01        |
+|        3 |           2 | 2016-06-01        |
+|        4 |           2 | 2015-06-01        |
+|        5 |           1 | 2015-06-01        |
++----------+-------------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDER_ID, COUNT(CUSTOMER_ID) FROM ORDERS;
++----------+--------------------+
+| ORDER_ID | COUNT(CUSTOMER_ID) |
++----------+--------------------+
+|        1 |                  5 |
++----------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ORDER_ID, CUSTOMER_ID FROM ORDERS;
++----------+-------------+
+| ORDER_ID | CUSTOMER_ID |
++----------+-------------+
+|        1 |           1 |
+|        2 |           1 |
+|        5 |           1 |
+|        3 |           2 |
+|        4 |           2 |
++----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT CUSTOMER_ID,ORDER_ID FROM ORDERS;
++-------------+----------+
+| CUSTOMER_ID | ORDER_ID |
++-------------+----------+
+|           1 |        1 |
+|           1 |        2 |
+|           1 |        5 |
+|           2 |        3 |
+|           2 |        4 |
++-------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT CUSTOMER_ID,COUNT(ORDER_ID) FROM ORDERS;
++-------------+-----------------+
+| CUSTOMER_ID | COUNT(ORDER_ID) |
++-------------+-----------------+
+|           1 |               5 |
++-------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT CUSTOMER_ID),COUNT(ORDER_ID) FROM ORDERS;
++-----------------------------+-----------------+
+| COUNT(DISTINCT CUSTOMER_ID) | COUNT(ORDER_ID) |
++-----------------------------+-----------------+
+|                           2 |               5 |
++-----------------------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| s1day2assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+7 rows in set (0.02 sec)
+
+mysql> use s1day2assingment;
+Database changed
+mysql> create table Worker(
+    ->     ->  WORKER_ID INT PRIMARY KEY,
+    ->     -> FIRST_NAME VARCHAR(25),
+    ->     -> LAST_NAME VARCHAR(25),
+    ->     -> SALARY INT,
+    ->     -> JOINING_DATE DATETIME,
+    ->     -> DEPARTMENT VARCHAR(25)
+    ->     -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->  WORKER_ID INT PRIMARY KEY,
+    -> FIRST_NAME VARCHAR(25),
+    -> LAST_NAME V' at line 2
+mysql> create table Worker(
+    ->       WORKER_ID INT PRIMARY KEY,
+    ->      FIRST_NAME VARCHAR(25),
+    ->      LAST_NAME VARCHAR(25),
+    ->     SALARY INT,
+    ->     JOINING_DATE DATETIME,
+    ->      DEPARTMENT VARCHAR(25)
+    ->      );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc workers;
+ERROR 1146 (42S02): Table 's1day2assingment.workers' doesn't exist
+mysql> desc worker;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| WORKER_ID    | int         | NO   | PRI | NULL    |       |
+| FIRST_NAME   | varchar(25) | YES  |     | NULL    |       |
+| LAST_NAME    | varchar(25) | YES  |     | NULL    |       |
+| SALARY       | int         | YES  |     | NULL    |       |
+| JOINING_DATE | datetime    | YES  |     | NULL    |       |
+| DEPARTMENT   | varchar(25) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> INSERT INTO Worker
+    ->      (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT)
+    ->      VALUES
+    ->      (001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+    ->      (002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+    ->      (003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+    ->      (004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+    ->      (005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+    ->      (006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+    ->      (007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+    ->      (008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+Query OK, 8 rows affected, 8 warnings (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 8
+
+mysql> select * from worker;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account    |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Bonus (
+    -> WORKER_REF_ID INT,
+    -> BONUS_AMOUNT INT,
+    -> BONUS_DATE DATETIME,
+    -> FOREIGN KEY (WORKER_REF_ID)
+    -> REFERENCES Worker(WORKER_ID)
+    -> ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc bonus;
++---------------+----------+------+-----+---------+-------+
+| Field         | Type     | Null | Key | Default | Extra |
++---------------+----------+------+-----+---------+-------+
+| WORKER_REF_ID | int      | YES  | MUL | NULL    |       |
+| BONUS_AMOUNT  | int      | YES  |     | NULL    |       |
+| BONUS_DATE    | datetime | YES  |     | NULL    |       |
++---------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Bonus
+    -> (WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+    -> (001, 5000, '16-02-20'),
+    -> (002, 3000, '16-06-11'),
+    -> (003, 4000, '16-02-20'),
+    -> (001, 4500, '16-02-20'),
+    -> (002, 3500, '16-06-11');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Title (
+    -> WORKER_REF_ID INT,
+    -> WORKER_TITLE VARCHAR(25),
+    -> AFFECTED_FROM DATETIME,
+    -> FOREIGN KEY (WORKER_REF_ID)
+    -> REFERENCES Worker(WORKER_ID)
+    -> ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Title
+    -> (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES
+    -> (001, 'Manager', '2016-02-20 00:00:00'),
+    -> (002, 'Executive', '2016-06-11 00:00:00'),
+    -> (008, 'Executive', '2016-06-11 00:00:00'),
+    -> (005, 'Manager', '2016-06-11 00:00:00'),
+    -> (004, 'Asst. Manager', '2016-06-11 00:00:00'),
+    -> (007, 'Executive', '2016-06-11 00:00:00'),
+    -> (006, 'Lead', '2016-06-11 00:00:00'),
+    -> (003, 'Lead', '2016-06-11 00:00:00');
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select SALARY from Worker where SALARY = (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker));
++--------+
+| SALARY |
++--------+
+| 300000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select SALARY from Worker where SALARY = (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker
+    -> where SALARY < (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker)))));
++--------+
+| SALARY |
++--------+
+|  90000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select SALARY from Worker where SALARY = (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker
+    -> where SALARY < (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker))));
++--------+
+| SALARY |
++--------+
+| 100000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select SALARY from Worker order by SALARY desc LIMIT 5 offset 1;
++--------+
+| SALARY |
++--------+
+| 500000 |
+| 300000 |
+| 200000 |
+| 100000 |
+|  90000 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select SALARY from Worker order by SALARY desc LIMIT 5 offset 0;
++--------+
+| SALARY |
++--------+
+| 500000 |
+| 500000 |
+| 300000 |
+| 200000 |
+| 100000 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select SALARY from Worker order by SALARY desc LIMIT 1 offset 5;
++--------+
+| SALARY |
++--------+
+|  90000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select SALARY from Worker order by SALARY desc LIMIT 1 offset 4;
++--------+
+| SALARY |
++--------+
+| 100000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select * from worker where WORKER_ID % 2 = 0;
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin      |
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|         8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select DEPARTMENT,count(WORKER_ID) NoOfWorkers from Worker group by DEPARTMENT ORDER BY NoOfWorkers desc;
++------------+-------------+
+| DEPARTMENT | NoOfWorkers |
++------------+-------------+
+| Admin      |           4 |
+| HR         |           2 |
+| Account    |           2 |
++------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql>
+mysql> SELECT Name
+    -> FROM table1
+    -> WHERE Salary IN (
+    ->     SELECT Salary
+    ->     FROM table1
+    ->     GROUP BY Salary
+    ->     HAVING COUNT(*) > 1
+    -> select SALARY from Worker where SALARY = (select max(SALARY) from Worker where SALARY < (select max(SALARY) from Worker;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select SALARY from Worker where SALARY = (select max(SALARY) from Worker where S' at line 8
+mysql> SELECT *
+    -> FROM worker
+    -> WHERE Salary IN (
+    ->     SELECT Salary
+    ->     FROM worker
+    -> group by salary
+    -> having count(*)>1);
++-----------+------------+-----------+--------+---------------------+------------+
+| WORKER_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTMENT |
++-----------+------------+-----------+--------+---------------------+------------+
+|         4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
++-----------+------------+-----------+--------+---------------------+------------+
+2 rows in set (0.00 sec)
+
+mysql>

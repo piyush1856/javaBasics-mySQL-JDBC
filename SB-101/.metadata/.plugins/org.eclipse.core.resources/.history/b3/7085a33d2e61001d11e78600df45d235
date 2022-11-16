@@ -1,0 +1,51 @@
+package com.mgnrega.usecase;
+
+import java.util.Formatter;
+import java.util.List;
+
+import com.mgnrega.dao.BdoImplementation;
+import com.mgnrega.dao.BdoInterface;
+import com.mgnrega.exception.ProjectException;
+import com.mgnrega.model.Project;
+
+public class DisplayAllProjectUseCase {
+	
+	public static void displayProject() {
+		
+		BdoInterface dao = new BdoImplementation();
+		
+		try {
+			List<Project> projects = dao.displayAllProject();
+			//projects.forEach(p -> System.out.println(p));
+
+			Formatter ftm = new Formatter();
+			
+			System.out.println("-------------------------------------------------------------------------------");
+			
+			System.out.printf("%4s %7s %16s %17s %15s", "PID", "GPMID", "NAME", "COST", "DURATION");
+			System.out.println();
+			System.out.print("-------------------------------------------------------------------------------");
+			
+			System.out.println();
+			for(Project p: projects) {
+				
+				
+				System.out.format("%3s %7s %22s %13s %11s",p.getPid(),p.getPgpid(),p.getPname(),p.getPcost(),p.getDuration());
+				System.out.println();
+			}
+			
+			System.out.println("-----------------------------------------------------------------------------------");
+			
+			
+			
+			
+		} catch (ProjectException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		
+	}
+
+}

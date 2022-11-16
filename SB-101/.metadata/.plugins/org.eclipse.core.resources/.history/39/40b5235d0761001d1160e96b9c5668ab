@@ -1,0 +1,11 @@
+package com.mgnrega.dao;
+
+public interface BdoInterface {
+	
+	public final String username = "bdo";
+	public final String password = "Bdo@1234";
+	
+	public Boolean bdologin(String username, String password);
+	
+
+}

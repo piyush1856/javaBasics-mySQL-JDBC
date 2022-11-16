@@ -1,0 +1,334 @@
+Subqueries:
+==========
+
+--a query inside another query is called subquery or nested query.
+
+--sub queries are used to retrive the data from single table or multiple tables 
+based on more than one step process.
+
+--here outer query is called parent query and inner query is called child query.
+
+--child query will execute first then only parent query will be executed.
+
+child query : it provides values/data to the parent query.
+
+parent query : it receives the values/data from the child query.
+
+rules:
+
+1. in child query we can not use order by clause ,but in parent query we can use.
+
+2.group by caluse we can use in both child query and parent query as well.
+
+
+Subqueries we can categories into following categories:
+-------------------------------------------------------------------
+
+1. single row and single col SQ : scalar value SQ
+
+2. multiple row and single col SQ.
+
+3. multiple col SQ
+
+
+1. single row and single col SQ : scalar value SQ:
+----------------------------------------------------------
+
+--here child query will return only a single value to the parent query
+
+--here mostly same col name which is in the where clause of the parent query, will be there inside the select clause of child query.
+
+Q/- WAQ to display emp details who is working in HR dept.
+
+A/- using join.
+
+> select e.eid, e.ename, e.address, e.salary 
+from dept d INNER JOIN emp e
+ON
+d.did = e.deptid AND d.dname = 'HR';
+
+ 
+using SQ:
+------------
+
+>select * from emp where deptid = (select did from dept where dname ='HR');
+
+Q/- WAQ to display emp details who is working with mukesh.
+
+> select * from emp where deptid= (select deptid from emp where ename = 'mukesh');
+
+Q/- WAQ to display emp details who is getting more sal than avg of emp table.
+
+> select * from emp where salary > (select avg(salary) from emp);
+
+
+Q/- WAQ to display second highest salaried employe details.
+
+first highest salaries employee:
+> select * from emp where salary = (select max(salary) from emp);
+
+second highest salaries employee:
+> select * from emp where salary = (select max(salary) from emp where salary < (select max(salary) from emp) );
+
+
+Q/- WAQ to display details of employee whoc is working under Ram.
+
+>select * from employee where mgr = (select eid from employee where ename = 'Ram');
+
+
+
+2. multiple row and single col SQ:
+===========================
+
+--In multi-row, single-col SQ, child query will return multiple rows and a single column to the parent query.
+
+--In this case in the parent query we should use one of the following operators:
+
+IN
+ANY
+ALL
+
+ex:
+					
+>select * from emp where salary IN (select salary from emp where eid > 1004);
+					10000,  20000, 50000
+> select * from emp where salary = ANY (select salary from emp where eid > 1000);
+					10000,  20000, 50000
+>select * from emp where salary > ANY (select salary from emp where eid > 1000);
+
+>select * from emp where salary < ANY (select salary from emp where eid > 1000);
+
+
+
+IN : it check equal to any number in the list (using OR)
+
+ANY : it compare any value in the list
+
+ALL : it compares all values in the list
+
+ex:
+
+salary > any (----); here it checks salary should be greater than any of the 4 values in the list.
+
+salary > all (----); here it checks salary should be greater than all of the 4 values in the list.
+
+
+  = any (10, 20 , 30, 40)
+
+ex:
+
+< any(): less than any : less than maximum.
+
+> any() : greater than any : greater than  minimum.
+
+= any() : equal to any : it is equal to IN operator.
+
+
+all:
+----
+
+10 =  all (10, 20 , 30, 40)
+
+< all() : less than all : less than minimum
+
+>all (): greater than all : greater than maximum
+
+=all(): equal to all : it is meaningless (because one value can not equal to multiple values)
+
+
+
+Q/- WAQ to display the emp who is getting max salary in each dept.
+
+
+getting the max salary emp from emp table dept wise.
+-----------------------------------------------------------------
+
+> select  max(salary) from emp group by deptid;
+
+>select * from emp where salary IN (select max(salary) from emp group by deptid);
+
+
+
+
+3. multiple col SQ:
+=================
+
+
+--if we try to compare multiple col values of the child query with the multiple
+column values of the parent query then we use this type of query.
+
+syn:
+
+select * from tab_name where (col1, col2, ...) IN (select col1, col2,... from table where condition);
+
+
+Q/ WAQ to display the emp details whose salary and deptid matches with 
+salary and deptid of Ram.
+
+>select * from emp where (salary, deptid) IN (select salary, deptid from emp where ename = 'Ram');
+
+
+
+
+
+
+If we want the name of department and employee name where salary is maximum  for that dept then we have to join both the tables along with applying sub query ...please show one such example
+
+d.dname, e. ename deptwise max salary
+
+
+
+>select deptid, max(salary) from emp group by deptid;
+
+
+>select  d.did ,d.dname, e.ename from dept d INNER JOIN emp e ON d.did = e.deptid AND  salary IN (select max(salary) from emp group by deptid);
+
+
+SQ in DML (insert, update, delete):
+===========
+
+SQ in insert:
+------------------
+
+>create table x1(id int, name varchar(12));
+
+>insert into x1 (select eid, ename from emp);
+
+>insert into x1 values(100, (select ename from emp where eid=1000));
+
+SQ in update:
+------------------
+
+here SQ is allowed inside where clause or Set clause also.
+
+ex:
+
+>update x1 set name = (select ename from emp where eid=1000) where id = (select eid from emp where name='chandan');
+
+SQ in delete:
+------------------
+
+> delete from x1 where id = (select eid from emp where enam ='amit');
+
+
+Autoincrement in mysql:
+====================
+
+--this is for auto generated id field.
+
+--mysql supports auto_increment where as Oracle db uses sequence concept to auto generate the ID field.
+
+create table student
+(
+roll int primary key auto_increment,
+name varchar(12),
+marks int
+);
+
+
+>alter table student auto_increment=1000;
+
+>alter table emp modify eid int primary key auto_increment;
+
+Limit :
+--------
+
+>select * from emp LIMIT 4;
+
+getting record from 3 -6th row
+
+> select * from emp LIMIT 4 OFFSET 2;
+
+
+relationship among tables:
+====================
+
+--at table level we have 3 type of relationships:
+
+1. One to One ( Person ---> DL, Person ---> AadharCard, Husband -wife )
+
+2. One to Many (Father -- child, Dept ---> emp , School ---> students, )
+
+3. Many to Many ( Student-- Course , Book---Author , Movies ---> actors )
+
+
+OTO :
+=======
+
+Person (pid, pname, address, mobile, email)
+
+DL (dlid, issueDate, expirationDate, RTO, pid (FK)----> refer Person(pid)  )
+
+here we need to make FK column of the DL table as unique.
+
+
+create table person
+(
+pid int primary key,
+pname varchar(12),
+address varchar(12),
+mobile varchar(10),
+email varchar(12)
+);
+
+create table DL 
+(
+dlid int primary key,
+issueDate date,
+expDate date,
+rto varchar(12),
+pid int unique,
+foreign key(pid) references Person (pid)
+);
+
+
+OTM:
+======
+
+dept (did, dname, location)
+emp (eid, ename, address, salary, deptid ---FK refer dept(did));
+
+MTM:
+=======
+
+create table student
+(
+roll int primary key,
+sname varchar(12),
+address varchar(12),
+mobile varchar(12)
+);
+
+
+create table course
+(
+cid int primary key,
+cname varchar(12),
+fee int,
+duration varchar(12)
+);
+
+Note: Whenever we have MTM relationship is there we need to take the support 
+of a 3rd linking table.
+
+student_course(cid, roll);
+
+create table student_course
+(
+roll int,
+cid int,
+foreign key (roll) references student(roll),
+foreign key (cid) references course(cid)
+);
+
+
+Q/ getting the Student details who enrolled in Java.
+
+>select s.roll, s. sname, s.address ,s.mobile, c.cname,c.fee ,c.duration from student s INNER JOIN course c INNER JOIN student_course sc 
+ON
+s.roll = sc.roll AND c.cid = sc.cid AND c.cname = 'Java';
+
+
+
+
+

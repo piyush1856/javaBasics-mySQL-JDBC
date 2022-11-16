@@ -1,0 +1,98 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> create database s1day2assingment;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| s1day2assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use s1day2assingment;
+Database changed
+mysql> CREATE TABLE customers (
+    -> customer_id INT PRIMARY KEY,
+    -> first_name VARCHAR(255) NOT NULL,
+    -> last_name VARCHAR(255) NOT NULL,
+    -> email VARCHAR(255) NOT NULL,
+    -> address VARCHAR(255) DEFAULT NULL,
+    -> city VARCHAR(255) DEFAULT NULL,
+    -> state VARCHAR(2) DEFAULT NULL,
+    -> zip_code VARCHAR(5) DEFAULT NULL
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY,
+    -> customer_id INT NOT NULL,
+    -> order_placed_date DATE NOT NULL,
+    -> FOREIGN KEY (customer_id) REFERENCES customers
+    -> (customer_id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_s1day2assingment |
++----------------------------+
+| customers                  |
+| orders                     |
++----------------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc customers;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| customer_id | int          | NO   | PRI | NULL    |       |
+| first_name  | varchar(255) | NO   |     | NULL    |       |
+| last_name   | varchar(255) | NO   |     | NULL    |       |
+| email       | varchar(255) | NO   |     | NULL    |       |
+| address     | varchar(255) | YES  |     | NULL    |       |
+| city        | varchar(255) | YES  |     | NULL    |       |
+| state       | varchar(2)   | YES  |     | NULL    |       |
+| zip_code    | varchar(5)   | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> desc orders;
++-------------------+------+------+-----+---------+-------+
+| Field             | Type | Null | Key | Default | Extra |
++-------------------+------+------+-----+---------+-------+
+| order_id          | int  | NO   | PRI | NULL    |       |
+| customer_id       | int  | NO   | MUL | NULL    |       |
+| order_placed_date | date | NO   |     | NULL    |       |
++-------------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+mysql>  select c.email, count(o.customer_id) order_count from  customers c inner join orders o on o.customer_id = 
+c.customer_id where order_placed_date > "2016-01-01" group by c.email;
++---------------+-------------+
+| email         | order_count |
++---------------+-------------+
+| abc@gmail.com |           2 |
+| efg@gmail.com |           1 |
++---------------+-------------+
+2 rows in set (0.00 sec)

@@ -1,0 +1,31 @@
+Java is a multi-threaded programming language and there is a higher risk to occur race conditions. Because the
+same resource may be accessed by multiple threads at the same time and may change the data.
+A race-condition is a condition in which the critical section (a part of the program where shared memory is accessed)
+is concurrently executed by two or more threads. It leads to incorrect behavior of a program.
+In layman terms, a race condition can be defined as, a condition in which two or more threads compete together to
+get certain shared resources.
+For example, if thread A is reading data from the linked list and another thread B is trying to delete the same data.
+This process leads to a race condition that may result in run time error
+To solve the data inconsistency problem in java synchronized keyword is used.
+So the thread-safety is achieved and race condition is avoided by the help of synchronized keyword.
+
+
+Example:
+
+class A{
+	synch funA(){}
+	synch funB(){}
+	funC(){}
+}
+
+Example: 
+void fun1(){
+	System.out.println("do something...");
+	//1 thousand lines of codes are there
+	synchronized(this){--//here if a thread gets the lock of current obj then it is allowed to execute
+	//this block
+	System.out.println("do some more thing1");
+	}
+	//1 thousand lines of codes r there
+}
+

@@ -1,0 +1,57 @@
+package com.mgnrega.dao;
+
+import java.sql.SQLException;
+
+import com.mgnrega.exception.CredentialException;
+import com.mgnrega.exception.ProjectException;
+import com.mgnrega.model.Project;
+
+public class BdoImplementation implements BdoInterface {
+	
+	/*----------------------------Login into their account------------------------------------------------------*/
+
+	@Override
+	public String bdologin(String username, String password) throws CredentialException {
+		
+		String result = "Invalid Credentials!";
+		
+		if (username.equals(BdoInterface.username) && password.equals(BdoInterface.password)) {
+			 result = "Welcome to BDO Account. Login Successful!";
+		}else {
+			throw new CredentialException(result);
+		}
+		return result;	
+	}
+	
+	
+	/*----------------------------------- Create a project --------------------------------------------------------*/
+	
+	@Override
+	public String createProject(Project p) throws ProjectException {
+		String result ="";
+		
+		try {
+			
+			
+			
+			
+		} catch (SQLException e) {
+			throw new ProjectException(e.getMessage());
+		}
+		
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

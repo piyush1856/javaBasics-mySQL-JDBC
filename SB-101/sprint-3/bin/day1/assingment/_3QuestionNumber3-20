@@ -1,0 +1,1371 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> use s1day1assingment;
+Database changed
+mysql> desc deposite;
+ERROR 1146 (42S02): Table 's1day1assingment.deposite' doesn't exist
+mysql> desc deposit;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| actno  | varchar(25) | YES  |     | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| bname  | varchar(20) | YES  |     | NULL    |       |
+| amount | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc customer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cname | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_s1day1assingment |
++----------------------------+
+| borrow                     |
+| branch                     |
+| customer                   |
+| deposit                    |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into deposit values(100,'ANIL','vrce',1000, "1995-03-01");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> date_format(sysdate(),'%d-%m-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date_format(sysdate(),'%d-%m-%y')' at line 1
+mysql> sysdate();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sysdate()' at line 1
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 19:40:28 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%m-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%m-%y') |
++-----------------------------------+
+| 20-10-22                          |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'Sunil','MGROAD','5000',"04-01-96");
+ERROR 1292 (22007): Incorrect date value: '04-01-96' for column 'ADATE' at row 1
+mysql>  select date_format(sysdate(),'%d-%M-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%M-%y') |
++-----------------------------------+
+| 20-October-22                     |
++-----------------------------------+
+1 row in set (0.01 sec)
+
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> date_format('1995-11-17','%d-%M-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 22:56:55 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> date_format('1995-11-17 00:00:00','%d-%M-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> SELECT FORMAT (getdate(), 'MMM dd yyyy') as date;
+ERROR 1305 (42000): FUNCTION s1day1assingment.getdate does not exist
+mysql> SELECT FORMAT (sysdate()(), 'MMM dd yyyy') as date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(), 'MMM dd yyyy') as date' at line 1
+mysql> SELECT FORMAT (sysdate(), 'MMM dd yyyy') as date;
++--------------------+
+| date               |
++--------------------+
+| 20,221,020,230,002 |
++--------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select date_format(sysdate(),'dd-MMM-yy');
++------------------------------------+
+| date_format(sysdate(),'dd-MMM-yy') |
++------------------------------------+
+| dd-MMM-yy                          |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%MMM-%y');
++-------------------------------------+
+| date_format(sysdate(),'%d-%MMM-%y') |
++-------------------------------------+
+| 20-OctoberMM-22                     |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%b-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%b-%y') |
++-----------------------------------+
+| 20-Oct-22                         |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%B-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%B-%y') |
++-----------------------------------+
+| 20-B-22                           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%b-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%b-%y') |
++-----------------------------------+
+| 20-Oct-22                         |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-upper(%b)-%y');
++------------------------------------------+
+| date_format(sysdate(),'%d-upper(%b)-%y') |
++------------------------------------------+
+| 20-upper(Oct)-22                         |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-upper(%b)-%y')
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> SELECT UPPER(DATE_FORMAT('2012-02-14', "%Y-%b-%m"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('2012-02-14', "%Y-%b-%m")) |
++----------------------------------------------+
+| 2012-FEB-02                                  |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT UPPER(DATE_FORMAT('2012-02-14', "%d-%b-%y"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('2012-02-14', "%d-%b-%y")) |
++----------------------------------------------+
+| 14-FEB-12                                    |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 23:17:53 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from deposite;
+ERROR 1146 (42S02): Table 's1day1assingment.deposite' doesn't exist
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    ->  UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql>  UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"))' at line 1
+mysql> SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y")) |
++----------------------------------------------+
+| 04-JAN-96                                    |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    -> SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"))' at line 2
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    -> UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y")));
+ERROR 1292 (22007): Incorrect date value: '04-JAN-96' for column 'ADATE' at row 1
+mysql> SELECT * FROM DEPOSIT;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW DEPOSIT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEPOSIT' at line 1
+mysql> DESC DEPOSIT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| actno  | varchar(25) | YES  |     | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| bname  | varchar(20) | YES  |     | NULL    |       |
+| amount | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> CREATE TABLE DEMO(DATE UPPER DATE_FORMAT("%d-%b-%y");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER DATE_FORMAT("%d-%b-%y")' at line 1
+mysql> select UPPER(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit;
++-----------+
+| ADATE     |
++-----------+
+| 01-MAR-95 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> update UPPER(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit' at line 1
+mysql> create table DEPOSIT(actno varchar(25), cname varchar(20),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table piyush(actno varchar(25),Sdate  UPPER(DATE_FORMAT(date, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT(date, "%d-%b-%y"))' at line 1
+mysql> create table piyush(actno varchar(25),Sdate  UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"))' at line 1
+mysql> create table piyush(actno varchar(25), UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(DATE_FORMAT(Sdate, "%d-%b-%y"))' at line 1
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  insert into deposit values(101,'SUNIL','MRROAD',5000, "1996-01-04");
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into deposit values(102,'RAHUL','KAROLBAGH',3500, "1995-11-17");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into deposit values(103,'MADHURI','CHANDNI',1200, "1995-12-17");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into deposit values(104,'PRAMOD','MAGROAD',3000, "1996-03-27");
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into deposit values(105,'SANDIP','KAROLBAGH',2000, "1996-03-31");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BRANCH values('VRCE','NAGPUR');
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into BRANCH values('KAROLBAGH','DELHI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BRANCH values('CHANDANI','DELHI');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BRANCH values('MGROAD','BANGLORE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into CUSTOMER values('ANIL','CALCUTTA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into CUSTOMER values('RAHUL','BARODA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('MADHURI','NAGPUR');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('PRAMOD','NAGPUR');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('SUNIL','DELHI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(201,'ANIL','VACE',1000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BORROW values(206,'RAHUL','KAROLBAGH',5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(311,'SUNIL','MGROAD',3000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(321,'MADHURI','CHANDNI',2000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(375,'PRAMOD','MGROAD',8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT * FROM BRANCH;
++-----------+----------+
+| bname     | city     |
++-----------+----------+
+| VRCE      | NAGPUR   |
+| KAROLBAGH | DELHI    |
+| CHANDANI  | DELHI    |
+| MGROAD    | BANGLORE |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM CUSTOMER;
++---------+----------+
+| cname   | city     |
++---------+----------+
+| ANIL    | CALCUTTA |
+| RAHUL   | BARODA   |
+| MADHURI | NAGPUR   |
+| PRAMOD  | NAGPUR   |
+| SUNIL   | DELHI    |
++---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW;
++--------+---------+-----------+--------+
+| loanno | cname   | bname     | amount |
++--------+---------+-----------+--------+
+| 201    | ANIL    | VACE      |   1000 |
+| 206    | RAHUL   | KAROLBAGH |   5000 |
+| 311    | SUNIL   | MGROAD    |   3000 |
+| 321    | MADHURI | CHANDNI   |   2000 |
+| 375    | PRAMOD  | MGROAD    |   8000 |
++--------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> use s1day1assingment;
+Database changed
+mysql> desc deposite;
+ERROR 1146 (42S02): Table 's1day1assingment.deposite' doesn't exist
+mysql> desc deposit;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| actno  | varchar(25) | YES  |     | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| bname  | varchar(20) | YES  |     | NULL    |       |
+| amount | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc customer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cname | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_s1day1assingment |
++----------------------------+
+| borrow                     |
+| branch                     |
+| customer                   |
+| deposit                    |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into deposit values(100,'ANIL','vrce',1000, "1995-03-01");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> date_format(sysdate(),'%d-%m-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date_format(sysdate(),'%d-%m-%y')' at line 1
+mysql> sysdate();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sysdate()' at line 1
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 19:40:28 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%m-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%m-%y') |
++-----------------------------------+
+| 20-10-22                          |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'Sunil','MGROAD','5000',"04-01-96");
+ERROR 1292 (22007): Incorrect date value: '04-01-96' for column 'ADATE' at row 1
+mysql>  select date_format(sysdate(),'%d-%M-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%M-%y') |
++-----------------------------------+
+| 20-October-22                     |
++-----------------------------------+
+1 row in set (0.01 sec)
+
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> date_format('1995-11-17','%d-%M-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 22:56:55 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(102,'RAHUL','KAROLBAGH','3500',
+    -> date_format('1995-11-17 00:00:00','%d-%M-%y');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> SELECT FORMAT (getdate(), 'MMM dd yyyy') as date;
+ERROR 1305 (42000): FUNCTION s1day1assingment.getdate does not exist
+mysql> SELECT FORMAT (sysdate()(), 'MMM dd yyyy') as date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(), 'MMM dd yyyy') as date' at line 1
+mysql> SELECT FORMAT (sysdate(), 'MMM dd yyyy') as date;
++--------------------+
+| date               |
++--------------------+
+| 20,221,020,230,002 |
++--------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select date_format(sysdate(),'dd-MMM-yy');
++------------------------------------+
+| date_format(sysdate(),'dd-MMM-yy') |
++------------------------------------+
+| dd-MMM-yy                          |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%MMM-%y');
++-------------------------------------+
+| date_format(sysdate(),'%d-%MMM-%y') |
++-------------------------------------+
+| 20-OctoberMM-22                     |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%b-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%b-%y') |
++-----------------------------------+
+| 20-Oct-22                         |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%B-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%B-%y') |
++-----------------------------------+
+| 20-B-22                           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%b-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%b-%y') |
++-----------------------------------+
+| 20-Oct-22                         |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-upper(%b)-%y');
++------------------------------------------+
+| date_format(sysdate(),'%d-upper(%b)-%y') |
++------------------------------------------+
+| 20-upper(Oct)-22                         |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-upper(%b)-%y')
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> SELECT UPPER(DATE_FORMAT('2012-02-14', "%Y-%b-%m"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('2012-02-14', "%Y-%b-%m")) |
++----------------------------------------------+
+| 2012-FEB-02                                  |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT UPPER(DATE_FORMAT('2012-02-14', "%d-%b-%y"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('2012-02-14', "%d-%b-%y")) |
++----------------------------------------------+
+| 14-FEB-12                                    |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 23:17:53 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from deposite;
+ERROR 1146 (42S02): Table 's1day1assingment.deposite' doesn't exist
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    ->  UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql>  UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"))' at line 1
+mysql> SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
++----------------------------------------------+
+| UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y")) |
++----------------------------------------------+
+| 04-JAN-96                                    |
++----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    -> SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y"))' at line 2
+mysql> insert into deposit values(101,'SUNIL','MGROAD',5000,
+    -> UPPER(DATE_FORMAT('1996-01-04', "%d-%b-%y")));
+ERROR 1292 (22007): Incorrect date value: '04-JAN-96' for column 'ADATE' at row 1
+mysql> SELECT * FROM DEPOSIT;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW DEPOSIT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEPOSIT' at line 1
+mysql> DESC DEPOSIT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| actno  | varchar(25) | YES  |     | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| bname  | varchar(20) | YES  |     | NULL    |       |
+| amount | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> CREATE TABLE DEMO(DATE UPPER DATE_FORMAT("%d-%b-%y");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER DATE_FORMAT("%d-%b-%y")' at line 1
+mysql> select UPPER(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit;
++-----------+
+| ADATE     |
++-----------+
+| 01-MAR-95 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> update UPPER(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(DATE_FORMAT(ADATE, "%d-%b-%y")) ADATE from deposit' at line 1
+mysql> create table DEPOSIT(actno varchar(25), cname varchar(20),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table piyush(actno varchar(25),Sdate  UPPER(DATE_FORMAT(date, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT(date, "%d-%b-%y"))' at line 1
+mysql> create table piyush(actno varchar(25),Sdate  UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"))' at line 1
+mysql> create table piyush(actno varchar(25), UPPER(DATE_FORMAT(Sdate, "%d-%b-%y"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(DATE_FORMAT(Sdate, "%d-%b-%y"))' at line 1
+mysql> select * from deposit;
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  insert into deposit values(101,'SUNIL','MRROAD',5000, "1996-01-04");
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into deposit values(102,'RAHUL','KAROLBAGH',3500, "1995-11-17");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into deposit values(103,'MADHURI','CHANDNI',1200, "1995-12-17");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into deposit values(104,'PRAMOD','MAGROAD',3000, "1996-03-27");
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into deposit values(105,'SANDIP','KAROLBAGH',2000, "1996-03-31");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BRANCH values('VRCE','NAGPUR');
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into BRANCH values('KAROLBAGH','DELHI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BRANCH values('CHANDANI','DELHI');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BRANCH values('MGROAD','BANGLORE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into CUSTOMER values('ANIL','CALCUTTA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into CUSTOMER values('RAHUL','BARODA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('MADHURI','NAGPUR');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('PRAMOD','NAGPUR');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into CUSTOMER values('SUNIL','DELHI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(201,'ANIL','VACE',1000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BORROW values(206,'RAHUL','KAROLBAGH',5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(311,'SUNIL','MGROAD',3000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(321,'MADHURI','CHANDNI',2000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into BORROW values(375,'PRAMOD','MGROAD',8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT * FROM BRANCH;
++-----------+----------+
+| bname     | city     |
++-----------+----------+
+| VRCE      | NAGPUR   |
+| KAROLBAGH | DELHI    |
+| CHANDANI  | DELHI    |
+| MGROAD    | BANGLORE |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM CUSTOMER;
++---------+----------+
+| cname   | city     |
++---------+----------+
+| ANIL    | CALCUTTA |
+| RAHUL   | BARODA   |
+| MADHURI | NAGPUR   |
+| PRAMOD  | NAGPUR   |
+| SUNIL   | DELHI    |
++---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW;
++--------+---------+-----------+--------+
+| loanno | cname   | bname     | amount |
++--------+---------+-----------+--------+
+| 201    | ANIL    | VACE      |   1000 |
+| 206    | RAHUL   | KAROLBAGH |   5000 |
+| 311    | SUNIL   | MGROAD    |   3000 |
+| 321    | MADHURI | CHANDNI   |   2000 |
+| 375    | PRAMOD  | MGROAD    |   8000 |
++--------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW AMOUNT BETWEEN 2000 AND 3000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BETWEEN 2000 AND 3000' at line 1
+mysql> SELECT * FROM BORROW amount BETWEEN 2000 AND 3000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BETWEEN 2000 AND 3000' at line 1
+mysql> SELECT * FROM BORROW amount >=2000 AND AMOUNT<=3000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>=2000 AND AMOUNT<=3000' at line 1
+mysql> select * from student where marks >=500 AND marks <= 800;
+ERROR 1146 (42S02): Table 's1day1assingment.student' doesn't exist
+mysql> select * from BORROW where AMOUNT >=500 AND AMOUNT <= 800;
+Empty set (0.00 sec)
+
+mysql> select * from BORROW where AMOUNT >=2000 AND AMOUNT <= 3000;
++--------+---------+---------+--------+
+| loanno | cname   | bname   | amount |
++--------+---------+---------+--------+
+| 311    | SUNIL   | MGROAD  |   3000 |
+| 321    | MADHURI | CHANDNI |   2000 |
++--------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW WHERE AMOUNT BETWEEN 2000 AND 3000;
++--------+---------+---------+--------+
+| loanno | cname   | bname   | amount |
++--------+---------+---------+--------+
+| 311    | SUNIL   | MGROAD  |   3000 |
+| 321    | MADHURI | CHANDNI |   2000 |
++--------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT NAME,ACCOUNT FROM DEPOSIT;
+ERROR 1054 (42S22): Unknown column 'NAME' in 'field list'
+mysql> SELECT CNAME,ACCOUNT FROM DEPOSIT;
+ERROR 1054 (42S22): Unknown column 'ACCOUNT' in 'field list'
+mysql> SELECT CNAME,ACTNO FROM DEPOSIT;
++---------+-------+
+| CNAME   | ACTNO |
++---------+-------+
+| ANIL    | 100   |
+| SUNIL   | 101   |
+| RAHUL   | 102   |
+| MADHURI | 103   |
+| PRAMOD  | 104   |
+| SANDIP  | 105   |
++---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT CNAME FROM CUSTOMER WHERE CITY ='NAGPUR';
++---------+
+| CNAME   |
++---------+
+| MADHURI |
+| PRAMOD  |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CNAME FROM DEPOSIT WHERE ADATE >1995-11-17;
++---------+
+| CNAME   |
++---------+
+| ANIL    |
+| SUNIL   |
+| RAHUL   |
+| MADHURI |
+| PRAMOD  |
+| SANDIP  |
++---------+
+6 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT CNAME FROM DEPOSIT WHERE ADATE >"1995-11-17";
++---------+
+| CNAME   |
++---------+
+| SUNIL   |
+| MADHURI |
+| PRAMOD  |
+| SANDIP  |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT CNAME,ACTNO FROM DEPOSIT WHERE ADATE BETWEEN
+    -> "1995-12-01" AND "1996-06-01";
++---------+-------+
+| CNAME   | ACTNO |
++---------+-------+
+| SUNIL   | 101   |
+| MADHURI | 103   |
+| PRAMOD  | 104   |
+| SANDIP  | 105   |
++---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE '%A';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE '%C';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE 'C%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE 'c%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE 'A%';
++-------+-------+-------+--------+------------+
+| actno | cname | bname | amount | ADATE      |
++-------+-------+-------+--------+------------+
+| 100   | ANIL  | vrce  |   1000 | 1995-03-01 |
++-------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE '_u%';
++-------+-------+--------+--------+------------+
+| actno | cname | bname  | amount | ADATE      |
++-------+-------+--------+--------+------------+
+| 101   | SUNIL | MRROAD |   5000 | 1996-01-04 |
++-------+-------+--------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDANI' AND 'MGROAD';
+Empty set, 1 warning (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDANI' AND BNAME <> 'MGROAD';
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDANI' OR BNAME <> 'MGROAD';
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME  NOT IN ('CHANDNI','MGROAD');
++-------+--------+-----------+--------+------------+
+| actno | cname  | bname     | amount | ADATE      |
++-------+--------+-----------+--------+------------+
+| 100   | ANIL   | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL  | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL  | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP | KAROLBAGH |   2000 | 1996-03-31 |
++-------+--------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDANI' OR BNAME <> 'MGROAD';
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDNI' OR BNAME <> 'MGROAD';
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDNI';
++-------+--------+-----------+--------+------------+
+| actno | cname  | bname     | amount | ADATE      |
++-------+--------+-----------+--------+------------+
+| 100   | ANIL   | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL  | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL  | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP | KAROLBAGH |   2000 | 1996-03-31 |
++-------+--------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDNI' AND BNAME <> 'MRROAD';
++-------+--------+-----------+--------+------------+
+| actno | cname  | bname     | amount | ADATE      |
++-------+--------+-----------+--------+------------+
+| 100   | ANIL   | vrce      |   1000 | 1995-03-01 |
+| 102   | RAHUL  | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP | KAROLBAGH |   2000 | 1996-03-31 |
++-------+--------+-----------+--------+------------+
+4 rows in set (0.00 sec)
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| s1day1assingment   |
+| sb101db            |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use s1day1assingment;
+Database changed
+mysql> show tables;
++----------------------------+
+| Tables_in_s1day1assingment |
++----------------------------+
+| borrow                     |
+| branch                     |
+| customer                   |
+| deposit                    |
++----------------------------+
+4 rows in set (0.01 sec)
+
+mysql>  SELECT * FROM DEPOSIT WHERE BNAME <> 'CHANDNI' AND BNAME <> 'MRROAD';
++-------+--------+-----------+--------+------------+
+| actno | cname  | bname     | amount | ADATE      |
++-------+--------+-----------+--------+------------+
+| 100   | ANIL   | vrce      |   1000 | 1995-03-01 |
+| 102   | RAHUL  | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP | KAROLBAGH |   2000 | 1996-03-31 |
++-------+--------+-----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM DEPOSIT WHERE BNAME = 'CHANDNI' AND BNAME  'MRROAD';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''MRROAD'' at line 1
+mysql>  SELECT * FROM DEPOSIT WHERE BNAME = 'CHANDNI' AND BNAME = 'MRROAD';
+Empty set (0.00 sec)
+
+mysql>  SELECT * FROM DEPOSIT WHERE BNAME = 'CHANDNI' or BNAME = 'MRROAD';
++-------+---------+---------+--------+------------+
+| actno | cname   | bname   | amount | ADATE      |
++-------+---------+---------+--------+------------+
+| 101   | SUNIL   | MRROAD  |   5000 | 1996-01-04 |
+| 103   | MADHURI | CHANDNI |   1200 | 1995-12-17 |
++-------+---------+---------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM DEPOSIT WHERE AMOUNT >1000 ORDER BY;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>  SELECT * FROM DEPOSIT WHERE AMOUNT >1000 ORDER BY ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ASC' at line 1
+mysql>  SELECT * FROM DEPOSIT WHERE AMOUNT >1000 ORDER BY NAME ASC;
+ERROR 1054 (42S22): Unknown column 'NAME' in 'order clause'
+mysql>  SELECT * FROM DEPOSIT WHERE AMOUNT >1000 ORDER BY CNAME ASC;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM DEPOSIT WHERE AMOUNT >1000 ORDER BY CNAME DESC;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM BORROW WHERE  CNAME IS LIKE IN('__A%','__D%');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE IN('__A%','__D%')' at line 1
+mysql>  SELECT * FROM BORROW WHERE  CNAME IS LIKE '__A%' OR LIKE '__D%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '__A%' OR LIKE '__D%'' at line 1
+mysql>  SELECT * FROM BORROW WHERE  CNAME IS LIKE '__A%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '__A%'' at line 1
+mysql> SELECT * FROM DEPOSIT WHERE CNAME LIKE '_u%';
++-------+-------+--------+--------+------------+
+| actno | cname | bname  | amount | ADATE      |
++-------+-------+--------+--------+------------+
+| 101   | SUNIL | MRROAD |   5000 | 1996-01-04 |
++-------+-------+--------+--------+------------+
+1 row in set (0.05 sec)
+
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '_u%';
++--------+-------+--------+--------+
+| loanno | cname | bname  | amount |
++--------+-------+--------+--------+
+| 311    | SUNIL | MGROAD |   3000 |
++--------+-------+--------+--------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '__u%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '__A%';
++--------+--------+--------+--------+
+| loanno | cname  | bname  | amount |
++--------+--------+--------+--------+
+| 375    | PRAMOD | MGROAD |   8000 |
++--------+--------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '__A%' OR LIKE '__D%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE '__D%'' at line 1
+mysql> SELECT * FROM BORROW WHERE CNAME LIKE '__A%' OR CNAME LIKE '__D%';
++--------+---------+---------+--------+
+| loanno | cname   | bname   | amount |
++--------+---------+---------+--------+
+| 321    | MADHURI | CHANDNI |   2000 |
+| 375    | PRAMOD  | MGROAD  |   8000 |
++--------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW AMOUNT NOT BETWEEN(2000,3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOT BETWEEN(2000,3000)' at line 1
+mysql> SELECT * FROM BORROW WHERE AMOUNT NOT BETWEEN(2000,3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> SELECT * FROM BORROW WHERE AMOUNT NOT BETWEEN 2000 AND 3000;
++--------+--------+-----------+--------+
+| loanno | cname  | bname     | amount |
++--------+--------+-----------+--------+
+| 201    | ANIL   | VACE      |   1000 |
+| 206    | RAHUL  | KAROLBAGH |   5000 |
+| 375    | PRAMOD | MGROAD    |   8000 |
++--------+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BORROW WHERE AMOUNT NOT BETWEEN 2000 AND 8000;
++--------+-------+-------+--------+
+| loanno | cname | bname | amount |
++--------+-------+-------+--------+
+| 201    | ANIL  | VACE  |   1000 |
++--------+-------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT DISTINCT FROM DEPOSIT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM DEPOSIT' at line 1
+mysql> DESC DEPOSIT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| actno  | varchar(25) | YES  |     | NULL    |       |
+| cname  | varchar(20) | YES  |     | NULL    |       |
+| bname  | varchar(20) | YES  |     | NULL    |       |
+| amount | int         | YES  |     | NULL    |       |
+| ADATE  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT AMOUNT FROM DEPOSIT;
++--------+
+| AMOUNT |
++--------+
+|   1000 |
+|   5000 |
+|   3500 |
+|   1200 |
+|   3000 |
+|   2000 |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT = AMOUNT*0.1 WHERE BNAME = 'vrce';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |    100 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT = 1000 WHERE BNAME = 'vrce';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT =AMOUNT+AMOUNT*0.1 WHERE BNAME = 'vrce';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1100 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT = 1000 WHERE BNAME = 'VRCE';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT =AMOUNT+AMOUNT*0.1 WHERE BNAME = 'VRCE';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1100 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT = 1000 WHERE BNAME = 'VRCE' AND CNAME ='ANIL';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1000 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT =AMOUNT+AMOUNT*0.1 WHERE BNAME = 'VRCE' AND CNAME = 'ANIL';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1100 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE DEPOSIT SET AMOUNT =AMOUNT+AMOUNT*0.1 WHERE BNAME = 'VRCE' AND CNAME = 'ANIL';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPOSIT;
++-------+---------+-----------+--------+------------+
+| actno | cname   | bname     | amount | ADATE      |
++-------+---------+-----------+--------+------------+
+| 100   | ANIL    | vrce      |   1210 | 1995-03-01 |
+| 101   | SUNIL   | MRROAD    |   5000 | 1996-01-04 |
+| 102   | RAHUL   | KAROLBAGH |   3500 | 1995-11-17 |
+| 103   | MADHURI | CHANDNI   |   1200 | 1995-12-17 |
+| 104   | PRAMOD  | MAGROAD   |   3000 | 1996-03-27 |
+| 105   | SANDIP  | KAROLBAGH |   2000 | 1996-03-31 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql>

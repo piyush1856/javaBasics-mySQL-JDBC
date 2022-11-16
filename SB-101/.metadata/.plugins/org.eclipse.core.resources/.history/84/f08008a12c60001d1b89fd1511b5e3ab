@@ -1,0 +1,21 @@
+package com.mgnrega;
+
+import java.io.Console;
+import java.util.Scanner;
+
+public class HitAndTry {
+	
+	public static void main(String[] args) {
+		
+		//Scanner sc = new Scanner(System.in);
+		Console c = System.console();
+		char[] pass = c.readPassword();
+		String s = String.valueOf(pass);
+		System.out.println(s);
+		
+		
+		
+		
+	}
+
+}

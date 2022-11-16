@@ -1,0 +1,39 @@
+Q1/- What is the requirement of Java Database communication?
+
+
+
+Definition of JDBC(Java Database Connectivity) 
+
+JDBC is an API(Application programming interface) used in java programming to interact with databases. The classes and interfaces of JDBC allow the 
+application to send requests made by users to the specified database.
+
+Purpose of JDBC 
+
+Enterprise applications created using the JAVA EE technology need to interact with databases to store application-specific information. 
+So, interacting with a database requires efficient database connectivity, which can be achieved by using the ODBC(Open database connectivity) driver.
+This driver is used with JDBC to interact or communicate with various kinds of databases such as Oracle, MS Access, Mysql, and SQL server database.
+
+
+
+RDBMS are excellent in data storage in a secure and easily retrival manner, but it is very poor in processing and presenting the data in user-understandable format.
+
+--Java is excellent in processing the data and presenting the data, but Java is very poor in storing the data 
+(In Java we can store the business data permanently using Serialization and Files)
+
+--so inorder to develop a powerfull business application we need to communicate our Java Application with the DB server.
+
+--Java App can do any task only through the method calls and objects, 
+these method calls and object are not directly understandable to the DB s/w.
+
+--DB s/w can understands only sql, Java Compiler does not accept the sql syntax directly.
+
+--Inspite of hetergenious platform Java-DB communication is possible through the JDBC.
+
+
+Chinese ------translator-----------Russian 
+
+Java -------- Jdbc driver s/w -----------------DB s/w
+
+
+
+JDBC is a technology that enables any kind of Java application to communicate with any kind of DB s/w in a standard manner.

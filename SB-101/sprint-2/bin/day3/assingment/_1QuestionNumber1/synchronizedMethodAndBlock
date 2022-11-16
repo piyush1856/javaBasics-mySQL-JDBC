@@ -1,0 +1,50 @@
+ What is the difference between a synchronized method and a synchronized block?
+ 
+ 
+ 
+ Java is a multi-threaded programming language and there is a higher risk to occur race conditions. Because the
+same resource may be accessed by multiple threads at the same time and may change the data.
+A race-condition is a condition in which the critical section (a part of the program where shared memory is accessed)
+is concurrently executed by two or more threads. It leads to incorrect behavior of a program.
+In layman terms, a race condition can be defined as, a condition in which two or more threads compete together to
+get certain shared resources.
+For example, if thread A is reading data from the linked list and another thread B is trying to delete the same data.
+This process leads to a race condition that may result in run time error
+
+To solve the data inconsistency problem in java synchronized keyword is used.
+So the thread-safety is achieved and race condition is avoided by the help of synchronized keyword.
+
+ 
+ 
+ 
+ 
+ Note: The synchronized keyword applicable only for methods and blocks but not for variables and classes.
+If a method or block is declared as synchronized then at a time only one thread is allowed to execute that method or
+block on a given object so that data inconsistency problem will be resolved.
+The main advantage of the synchronized keyword is we can resolve data inconsistency problem. but the main
+disadvantage of the synchronized keyword is it increases waiting time of the threads and creates performance
+problem on it. hence if there is no specific requirement then it is never recommended to use the synchronized
+keyword.
+Example:
+checking seat availability method should be non-synchronized, where as book seat method should be
+synchronized
+Any method that changes the state of an object. i.e. add/update/delete/replace method we should use as
+synchronized.
+
+
+
+
+
+If very few lines of the code requires synchronization then it is not recommended to declare entire method as
+synchronized. we have to enclose those few lines of the code in synchronized block.
+In a method, assume 10000 lines code is there, and in the middle somewhere few line need some Database
+operation like(update/delete/add) then declaring entire method as synchronized is a worst kind of programming. here
+it degrades the performance.
+The main advantage of synchronized block over synchronized method is ,it reduces the waiting time of the threads
+and improves the performance of the application.
+
+
+
+
+
+ 

@@ -1,0 +1,5 @@
+package com.mgnrega.model;
+
+public class Employee {
+
+}

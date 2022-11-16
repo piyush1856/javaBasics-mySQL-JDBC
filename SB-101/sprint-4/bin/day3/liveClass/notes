@@ -1,0 +1,273 @@
+Performing DRL opeation (select opeation):
+==================================
+
+PreparedStatement ps=  conn.prepareStatement("select * from student");
+
+ResultSet rs=  ps.executeQuery();
+
+--here we get the records from the DB, in the form of "java.sql.ResultSet(I)" object..
+
+
+
+--in order to get the details from the ResultSet object, we should know the structure of the ResultSet object.
+
+Note: ResultSet object structure will depends upon the query what we have executed, if does not depends upon the table structure.
+
+refer resultset_structure pic.
+
+Now we need to move the cursor from the BFR to the record area, and fetch the data from 
+each column(cell).
+
+--to move the cursor from the BFR to the record area we have a method in the ResultSet object :
+
+public boolean next(); // it will move the cursor to the record area and if any record is there then it returns true  and if it points to the ALR then it returns false.
+
+
+--to access/get the column/cell value, from the cursor pointed record area we need to use following methods of the ResultSet object.
+
+public XXX getXXX(String columnName);  // here XXX will replace with appropriate data type of the value.
+
+ex:
+
+public int getInt("roll");
+public String getString("name");
+public int getInt("marks");
+
+ex:
+
+int r=  rs.getInt("roll");
+String n= rs.getString("name");
+int m= rs.getInt("marks");
+
+
+Note: to move the cursor from the BFR to the record area we need to follow following stretegy:
+
+1. If we sure that only 0 or 1  record will be there (atmost 1) : in that case we should use "if-else" condition.
+(when our search condition in on the Primary key)
+ 
+2. if there may be a chance of getting more than 1 record then we need to use "while loop".
+
+
+example:
+
+Demo.java:
+---------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UpdateStudent {
+	
+	
+	public static void main(String[] args) {
+	
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try( Connection conn= DriverManager.getConnection(url,"root","root") ) {
+			
+			PreparedStatement ps= conn.prepareStatement("select * from student");
+			
+			ResultSet rs= ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int r= rs.getInt("roll");
+				String n= rs.getString("name");
+				int m= rs.getInt("marks");
+				
+				System.out.println("Roll is :"+r);
+				System.out.println("Name is :"+n);
+				System.out.println("Marks is :"+m);
+				
+				System.out.println("=========================");
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+
+Developing a searching application using JDBC:
+======================================
+
+Demo.java:
+---------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UpdateStudent {
+	
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter Roll to Search a student:");
+		int roll= sc.nextInt();
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try( Connection conn= DriverManager.getConnection(url,"root","root") ) {
+			
+			PreparedStatement ps= conn.prepareStatement("select * from student where roll = ?");
+			
+			ps.setInt(1, roll);
+			
+			ResultSet rs= ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				int r= rs.getInt("roll");
+				String n= rs.getString("name");
+				int m= rs.getInt("marks");
+				
+				System.out.println("Roll is :"+r);
+				System.out.println("Name is :"+n);
+				System.out.println("Marks is :"+m);
+				
+				
+			}else
+				System.out.println("Student does not exist with Roll :"+roll);
+			
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+				
+	}
+
+}
+
+Getting only marks of one student:
+===========================
+
+Demo.java:
+---------------
+
+package com.masai;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UpdateStudent {
+	
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter Roll to get the Marks:");
+		int roll= sc.nextInt();
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String url = "jdbc:mysql://localhost:3306/web20sb101db";
+		
+		try( Connection conn= DriverManager.getConnection(url,"root","root") ) {
+			
+			PreparedStatement ps= conn.prepareStatement("select marks from student where roll = ?");
+			
+			ps.setInt(1, roll);
+			
+			ResultSet rs= ps.executeQuery();
+			
+			if(rs.next()) {
+				
+			
+//				int m= rs.getInt("marks");
+//				System.out.println("Marks is :"+m);
+				
+				System.out.println("Marks is :"+rs.getInt("marks"));
+				
+				
+			}else
+				System.out.println("Student does not exist with Roll :"+roll);
+			
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+
+
+
+DAO pattern(Data Access Object):
+===========================
+
+
+
+
+
+
+
+
+
+

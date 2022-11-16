@@ -1,0 +1,39 @@
+package com.mgnrega.main;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import com.mgnrega.custom.ConsoleColors;
+
+public class Main {
+	
+	public static void main(String[] args) throws InputMismatchException {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println(ConsoleColors.BROWN_BACKGROUND+ConsoleColors.WHITE_BOLD_BRIGHT+"Welcome to GRAM MGNREGA Application : "+ ConsoleColors.RESET);
+		
+		System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+"Choose User Type from Below Option  : " + ConsoleColors.RESET);
+		System.out.println("Press 1 to logIn as BDO.");
+		System.out.println("Press 2 to logIn as Gram Panchayat Member.");
+		System.out.println("Press 3 to EXIT.");
+		int choice = sc.nextInt();
+		
+		if(choice ==1) {
+			System.out.println("bdo");
+		}else if(choice ==2) {
+			System.out.println("gpm");
+		}else if(choice ==3) {
+			System.out.println("exit");
+			System.exit(0);
+		}else {
+			throw new InputMismatchException();
+		}
+		
+		
+		
+		
+		
+		
+	}
+
+}

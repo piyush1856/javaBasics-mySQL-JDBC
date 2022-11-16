@@ -1,0 +1,25 @@
+Sleep() :
+The Sleep () method is related to the Thread class that is used to stop the 
+execution of the current Thread for few seconds. The Sleep () method takes the 
+sleeping time in milliseconds. The monitor's ownership is not lost when we use the 
+Sleep () method and start the execution again from where it stops. In simple words,
+ the Sleep() method is responsible for sending the current Thread into
+  the "Non Runnable" state.
+  
+  It is a static method.
+  At the time of the Synchronization, the Sleep() method doesn't release the obj, i.e., lock.
+  We can call the Sleep () method from outside the Synchronized context.
+  
+  
+  
+  
+ Wait() : 
+ The Wait() method is related to the Object class. The Wait() method is responsible
+ for sending the calling thread into the waiting state. The Thread remains in the 
+ waiting state until another thread doesn't invoke the notify() or notifyAll()
+ method for that object. The Thread resumes the execution after obtaining the
+ ownership of the monitor.
+ 
+It is not a static method.
+At the time of the Synchronization, the Wait() method releases obj.
+We can call the Wait () method only from the Synchronized context.

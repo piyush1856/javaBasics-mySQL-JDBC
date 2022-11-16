@@ -1,0 +1,37 @@
+package com.mgnrega.usecase;
+
+import java.util.Scanner;
+
+import com.mgnrega.custom.ConsoleColors;
+import com.mgnrega.dao.BdoImplementation;
+import com.mgnrega.dao.BdoInterface;
+
+public class BdoLoginUseCase {
+	
+	public static boolean bdoLogin() {
+			
+		
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Username : ");
+		String username = sc.next();
+		System.out.println("Enter Password : ");
+		String password = sc.next();
+		
+		BdoInterface dao = new BdoImplementation();
+		String result = dao.bdologin(username, password);
+		
+		
+		if(result.equals("Login Successful!")) {
+			System.out.println(ConsoleColors.GREEN_BACKGROUND + result + ConsoleColors.RESET);
+			return true;
+		}else {
+			
+			System.out.println(ConsoleColors.RED_BACKGROUND + result + ConsoleColors.RESET);
+			return false;
+			
+		}		
+		
+	}
+
+}

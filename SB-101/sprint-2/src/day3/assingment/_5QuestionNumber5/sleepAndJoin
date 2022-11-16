@@ -1,0 +1,25 @@
+Suspending a thread based on time:
+There is a static method by name sleep(long ms) inside the Thread class which takes time in milliseconds as an
+argument
+Example:
+ Thread.sleep(1000);
+This method will suspend the current thread which is under execution with those many millisecond passed as
+argument(1000ms=1sec).
+This sleep method is proven to generate checked exception hence it must be called inside try and catch block.
+Note : we cannot use throws with run() method, it will violate the method override rule.
+The main reason is that there's no-one to catch the exception, except for any catch-all handlers you might register
+with your  Thread or the containing  ThreadGroup
+
+
+
+Suspending a thread conditionally:
+join() method
+If we want to suspend a running thread conditionally then we should use join() method of the Thread class.
+The join() method is a non-static method.
+If a thread wants to wait until completion of other thread then we should use join() method.
+If a thread t1 calls join() method on another thread t2, like t2.join() then t1 thread will be enter into waiting state
+until t2 thread completes.
+Let’s assume that we have two threads available t1 and t2.
+now if we have a condition that inside run() method of t1 we need to use some of the values calculated in run()
+method of t2,then in this case we have to stop the execution of run() method of t1 until the run() method of t2 is
+completely executed. in such situation we have to make use of join() method.

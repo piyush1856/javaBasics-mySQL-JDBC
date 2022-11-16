@@ -1,0 +1,41 @@
+Q2/- What is JDBC, Write a note on JDBC driver software
+
+Definition of JDBC(Java Database Connectivity) 
+
+JDBC is an API(Application programming interface) used in java programming to interact with databases. The classes and interfaces of JDBC allow the 
+application to send requests made by users to the specified database.
+
+JDBC is a technology that enables any kind of Java application to communicate with any kind of DB s/w in a standard manner.
+
+
+
+
+--in order to communicate our Java application with the DB server, Java
+developer need to get/download Jdbc driver s/w and need to add the jdbc driver related 
+jar file in the classpath of our application.
+
+
+
+--In order to communicate our java appplication with the DB server, Java Developer needs 2 things:
+
+1.JDBC driver related jar file
+
+2.jdbc API (this api comes in the form of following 2 packages):
+
+
+
+JDBC driver:
+==========
+
+--it is a translation s/w written in Java according to the Jdbc Specification
+(it comes in the form of .jar file)
+
+Responsibility of Jdbc Driver :
+=======================
+
+1. establishing the connection.
+
+2. receiving the jdbc method calls (java method call) and translate them
+into the DB understandable format (sql) and forward them to the DB server.
+
+3. Translating the DB s/w given result in the the Java format (Java objects) and returns that object to the JDBC client.

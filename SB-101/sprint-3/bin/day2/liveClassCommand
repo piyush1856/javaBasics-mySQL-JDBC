@@ -1,0 +1,945 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sb101db
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_sb101db |
++-------------------+
+| student           |
++-------------------+
+1 row in set (0.03 sec)
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   208 |
+|   12 | Piyush Tyagi |   289 |
+|   18 | Piyush Tyagi |   199 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Piyush Tyagi |   215 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> student set marks = marks+50;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student set marks = marks+50' at line 1
+mysql> update  student set marks = marks+50;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 5  Changed: 4  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(12) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Piyush Tyagi |   339 |
+|   18 | Piyush Tyagi |   249 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Piyush Tyagi |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set marks = marks+50 where roll =12;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Piyush Tyagi |   389 |
+|   18 | Piyush Tyagi |   249 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Piyush Tyagi |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set name = 'Prashant' where roll =12;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Piyush Tyagi |   249 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Piyush Tyagi |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set name = 'Ritesh' where roll =18;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  student set name = 'Nirnay' where marks =265;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Ritesh       |   249 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Nirnay       |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set marks = marks+500 where marks<250;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Ritesh       |   749 |
+|   22 | Piyush Tyagi |  NULL |
+|   25 | Nirnay       |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set name = 'Krishna',marks=marks+50 where
+    -> roll =22
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Ritesh       |   749 |
+|   22 | Krishna      |  NULL |
+|   25 | Nirnay       |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  student set marks = 500 where marks is null;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Ritesh       |   749 |
+|   22 | Krishna      |   500 |
+|   25 | Nirnay       |   265 |
++------+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from student where roll=22;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+--------------+-------+
+| roll | name         | marks |
++------+--------------+-------+
+|   10 | Piyush Tyagi |   258 |
+|   12 | Prashant     |   389 |
+|   18 | Ritesh       |   749 |
+|   25 | Nirnay       |   265 |
++------+--------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delete from student where name='Piyush Tyagi' AND marks >500;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from student where name='Piyush Tyagi' or marks >500;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where roll =12;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
++------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name from student;
++----------+
+| name     |
++----------+
+| Prashant |
+| Nirnay   |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select roll from student;
++------+
+| roll |
++------+
+|   12 |
+|   25 |
++------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select name,roll from student;
++----------+------+
+| name     | roll |
++----------+------+
+| Prashant |   12 |
+| Nirnay   |   25 |
++----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select name from student where roll =25;
++--------+
+| name   |
++--------+
+| Nirnay |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select name,roll from student where marks >400;
+Empty set (0.00 sec)
+
+mysql> select name,roll from student where marks <400;
++----------+------+
+| name     | roll |
++----------+------+
+| Prashant |   12 |
+| Nirnay   |   25 |
++----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student order by marks;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   25 | Nirnay   |   265 |
+|   12 | Prashant |   389 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student order by marks desc;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student order by marks desc;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student order by marks;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   25 | Nirnay   |   265 |
+|   12 | Prashant |   389 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> clear
+mysql> clear;
+mysql> select * from student order by marks;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   25 | Nirnay   |   265 |
+|   12 | Prashant |   389 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select name,marks, marks+100 from student;
++----------+-------+-----------+
+| name     | marks | marks+100 |
++----------+-------+-----------+
+| Prashant |   389 |       489 |
+| Nirnay   |   265 |       365 |
++----------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select name,marks, marks+100 GraceMarks from student;
++----------+-------+------------+
+| name     | marks | GraceMarks |
++----------+-------+------------+
+| Prashant |   389 |        489 |
+| Nirnay   |   265 |        365 |
++----------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
++------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student values(10,'Ritesh',137);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
++------+----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student values(11,'Piyush',237);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(13,'Bob',337);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(14,'Gaurav',437);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(15,'Vikash',537);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(16,'Prince',637);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(16,'Prince',637);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(16,'Prince',637);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
+|   11 | Piyush   |   237 |
+|   13 | Bob      |   337 |
+|   14 | Gaurav   |   437 |
+|   15 | Vikash   |   537 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
++------+----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select marks from student;
++-------+
+| marks |
++-------+
+|   389 |
+|   265 |
+|   137 |
+|   237 |
+|   337 |
+|   437 |
+|   537 |
+|   637 |
+|   637 |
+|   637 |
++-------+
+10 rows in set (0.00 sec)
+
+mysql> select DISTINCT marks from student;
++-------+
+| marks |
++-------+
+|   389 |
+|   265 |
+|   137 |
+|   237 |
+|   337 |
+|   437 |
+|   537 |
+|   637 |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into student values(13,'Bob',337);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(14,'Gaurav',437);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select DISTINCT marks from student;
++-------+
+| marks |
++-------+
+|   389 |
+|   265 |
+|   137 |
+|   237 |
+|   337 |
+|   437 |
+|   537 |
+|   637 |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from student where marks != 237;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
+|   13 | Bob      |   337 |
+|   14 | Gaurav   |   437 |
+|   15 | Vikash   |   537 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   13 | Bob      |   337 |
+|   14 | Gaurav   |   437 |
++------+----------+-------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student where marks <> 337;
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
+|   11 | Piyush   |   237 |
+|   14 | Gaurav   |   437 |
+|   15 | Vikash   |   537 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   14 | Gaurav   |   437 |
++------+----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from student where marks IN(237,337,437);
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   11 | Piyush |   237 |
+|   13 | Bob    |   337 |
+|   14 | Gaurav |   437 |
+|   13 | Bob    |   337 |
+|   14 | Gaurav |   437 |
++------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where marks NOT  IN(237,337,437);
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
+|   15 | Vikash   |   537 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
++------+----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from student where marks BETWEEN 500 AND 800;
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   15 | Vikash |   537 |
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
++------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where marks>=500 AND marks<=800;
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   15 | Vikash |   537 |
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
++------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where name LIKE 'r%';
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   10 | Ritesh |   137 |
++------+--------+-------+
+1 row in set (0.01 sec)
+
+mysql> select * from student where name LIKE '%r%';
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   25 | Nirnay   |   265 |
+|   10 | Ritesh   |   137 |
+|   14 | Gaurav   |   437 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   14 | Gaurav   |   437 |
++------+----------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from student where name LIKE '_r';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '%rin%';
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
+|   16 | Prince |   637 |
++------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where name LIKE '%r';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '%v';
++------+--------+-------+
+| roll | name   | marks |
++------+--------+-------+
+|   14 | Gaurav |   437 |
+|   14 | Gaurav |   437 |
++------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name LIKE '_r';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '_r%';
++------+----------+-------+
+| roll | name     | marks |
++------+----------+-------+
+|   12 | Prashant |   389 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
+|   16 | Prince   |   637 |
++------+----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(12) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> use sb101db;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sb101db            |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use sb101db;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> desc student;
+ERROR 1146 (42S02): Table 'sb101db.student' doesn't exist
+mysql> create table student
+    -> (
+    -> roll int primary key,
+    -> name varchar(12) not null unique,
+    -> address varchar(12) unique,
+    -> marks int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll    | int         | NO   | PRI | NULL    |       |
+| name    | varchar(12) | NO   | UNI | NULL    |       |
+| address | varchar(12) | YES  | UNI | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into student values(10,'Piyush','Godda'850);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '850)' at line 1
+mysql> insert into student values(10,'Piyush','Godda',850);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(11,'Nirnay','Upper Bazar',950);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(12,'Ritesh','Lalpur',950);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(13,'Prashant','Samlong',750);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(14,'Bob','Kantatoli',650);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(14,'Bob','Kantatoli',650);
+ERROR 1062 (23000): Duplicate entry '14' for key 'student.PRIMARY'
+mysql> insert into student values(15,'Bob','Kantatoli',650);
+ERROR 1062 (23000): Duplicate entry 'Bob' for key 'student.name'
+mysql> insert into student values(15,'Shatak','Kantatoli',650);
+ERROR 1062 (23000): Duplicate entry 'Kantatoli' for key 'student.address'
+mysql> insert into student values(15,'Shatak','3rd lane',650);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table teachercreate table teacher(
+    ->
+    -> tname varchar(12),
+    -> subject varchar(12),
+    -> age int,
+    -> phone varchar(10),
+    -> email varchar(15),
+    -> primary key(tname,subject)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+
+tname varchar(12),
+subject varchar(12),
+age int,
+phone varchar(10),
+email var' at line 1
+mysql> create table teacher(
+    ->
+    -> tname varchar(12),
+    -> subject varchar(12),
+    -> age int,
+    -> phone varchar(10),
+    -> email varchar(15),
+    -> primary key(tname,subject)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc teacher;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tname   | varchar(12) | NO   | PRI | NULL    |       |
+| subject | varchar(12) | NO   | PRI | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| phone   | varchar(10) | YES  |     | NULL    |       |
+| email   | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into teacher values('Ravi','JAVA',28,'56665466','ravi@gmail');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into teacher values('Ravi','JAVA',28,'56665466','ravi@gmail');
+ERROR 1062 (23000): Duplicate entry 'Ravi-JAVA' for key 'teacher.PRIMARY'
+mysql> primary key(tname,subject)
+    ->
+    -> email varchar(15),
+    ->
+    ->
+    -> email varchar(15),
+    -> clear
+    -> insert into teacher values('Ravi','JAVA',28,'56665466','ravi@gmail');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key(tname,subject)
+
+email varchar(15),
+
+
+email varchar(15),
+clear
+insert' at line 1
+mysql> insert into teacher values('Ravi','SPRING',28,'56665466','ravi@gmail');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into teacher values('Arjun','JAVA',32,'987465466','arjun@gmail');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table dept
+    -> (
+    -> did int primary key,
+    -> dname varchar(12) not null,
+    -> location varchar(12)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table emp
+    -> (
+    -> eid int primary key,
+    -> ename varchar(12),
+    -> address varchar(12),
+    -> salary int,
+    -> deptid int
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into dept values(10,'HR','Pune');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(12,'Accounts','Dubai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dept values(13,'Sales','Chennai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dept values(14,'Marketing','Mumbai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc dept;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| did      | int         | NO   | PRI | NULL    |       |
+| dname    | varchar(12) | NO   |     | NULL    |       |
+| location | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from dept;
++-----+-----------+----------+
+| did | dname     | location |
++-----+-----------+----------+
+|  10 | HR        | Pune     |
+|  12 | Accounts  | Dubai    |
+|  13 | Sales     | Chennai  |
+|  14 | Marketing | Mumbai   |
++-----+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> drop table emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table emp
+    -> (
+    -> eid int primary key,
+    -> ename varchar(12),
+    -> address varchar(12),
+    -> salary int,
+    -> deptid int,
+    -> foreign key (deptid) references dept(did)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into emp values(1000,'ravi','patna',85000,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(1001,'manoj','patna',85000,50);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`))
+mysql> insert into emp values(1001,'manoj','patna',85000,20);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`))
+mysql> insert into emp values(1001,'manoj','patna',85000,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1003,'manoj','patna',85000,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1005,'Piyush','delhi',75000,null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1006,'amit','MP',65000,10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp
+    -> ;
++------+--------+---------+--------+--------+
+| eid  | ename  | address | salary | deptid |
++------+--------+---------+--------+--------+
+| 1000 | ravi   | patna   |  85000 |     10 |
+| 1001 | manoj  | patna   |  85000 |     12 |
+| 1003 | manoj  | patna   |  85000 |     12 |
+| 1005 | Piyush | delhi   |  75000 |   NULL |
+| 1006 | amit   | MP      |  65000 |     10 |
++------+--------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-----------+----------+
+| did | dname     | location |
++-----+-----------+----------+
+|  10 | HR        | Pune     |
+|  12 | Accounts  | Dubai    |
+|  13 | Sales     | Chennai  |
+|  14 | Marketing | Mumbai   |
++-----+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> drop table dept;
+ERROR 3730 (HY000): Cannot drop table 'dept' referenced by a foreign key constraint 'emp_ibfk_1' on table 'emp'.
+mysql> update dept set location ='kolkata' where did =10;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update dept set did =200  where did =10;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`))
+mysql> drop table emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table emp
+    -> (
+    -> eid int primary key,
+    -> ename varchar(12),
+    -> address varchar(12),
+    -> salary int,
+    -> deptid int,
+    -> foreign key (deptid) references dept(did) ON UPDATE CASCADE 
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into emp values(1000,'ravi','patna',85000,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(1001,'manoj','patna',85000,50);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`) ON UPDATE CASCADE)
+mysql> insert into emp values(1001,'manoj','patna',85000,20);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`) ON UPDATE CASCADE)
+mysql> insert into emp values(1001,'manoj','patna',85000,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1003,'manoj','patna',85000,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1005,'Piyush','delhi',75000,null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(1006,'amit','MP',65000,10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp
+    -> ;
++------+--------+---------+--------+--------+
+| eid  | ename  | address | salary | deptid |
++------+--------+---------+--------+--------+
+| 1000 | ravi   | patna   |  85000 |     10 |
+| 1001 | manoj  | patna   |  85000 |     12 |
+| 1003 | manoj  | patna   |  85000 |     12 |
+| 1005 | Piyush | delhi   |  75000 |   NULL |
+| 1006 | amit   | MP      |  65000 |     10 |
++------+--------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update dept set did =200 where did =10;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp;
++------+--------+---------+--------+--------+
+| eid  | ename  | address | salary | deptid |
++------+--------+---------+--------+--------+
+| 1000 | ravi   | patna   |  85000 |    200 |
+| 1001 | manoj  | patna   |  85000 |     12 |
+| 1003 | manoj  | patna   |  85000 |     12 |
+| 1005 | Piyush | delhi   |  75000 |   NULL |
+| 1006 | amit   | MP      |  65000 |    200 |
++------+--------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-----------+----------+
+| did | dname     | location |
++-----+-----------+----------+
+|  12 | Accounts  | Dubai    |
+|  13 | Sales     | Chennai  |
+|  14 | Marketing | Mumbai   |
+| 200 | HR        | kolkata  |
++-----+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create table a1(id int, name varchar(12));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table a1 modify id int primary key;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table b1(bid int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table b1 add foreign key(bid) references a1(id) on delete set null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>

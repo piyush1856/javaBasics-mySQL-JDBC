@@ -1,0 +1,34 @@
+Serialization and Deserialization : 
+
+Serialization is the conversion of the state of an object into a byte stream. which we can then save to a
+database or transfer over a network.
+
+The reverse operation of serialization is called deserialization where byte-stream is converted into an
+object. The serialization and deserialization process is platform-independent, it means you can serialize an
+object on one platform and deserialize it on a different platform.
+
+We can’t serialize any java class object, There is an interface called java.io.Serializable, The class which
+implements this Serializable interface, that class object is only eligible for serialization.
+
+Note: If we try to serialize a non-serializable object (If the object of a class has not implemented the
+Serializable interface )then we will get a runtime exception called NotSerializableExcception
+
+Serializable is a marker interface (has no data member and method). It is used to "mark" Java classes so
+that the objects of these classes may get a certain capability.
+
+Note: all the Wrapper classes, String classes and collection framework related classes internally
+implements the Serializable interface.
+
+The java.io.ObjectOutputStream class helps us to serialize an object of a java class (converts it into a
+sequence (stream) of bytes)
+
+Similarly, The java.io.ObjectInputStream class helps us read a stream of bytes and convert it back into a
+Java object.(Deserialization)
+
+ObjectOutputStream class has a method by name writeObject(Serializable s) ,it takes an object of a
+class whose class implements Serializable interface. and converts it into a sequence (stream) of bytes.
+
+Note: we can serialize multiple object, but in which order we serialized those objects, in the same order
+only we have to deserialize those objects.
+
+

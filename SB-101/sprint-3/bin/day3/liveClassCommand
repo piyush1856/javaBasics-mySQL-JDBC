@@ -1,0 +1,527 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sb101db;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_sb101db |
++-------------------+
+| a1                |
+| b1                |
+| dept              |
+| emp               |
+| student           |
+| teacher           |
++-------------------+
+6 rows in set (0.01 sec)
+
+mysql> select abs(-40) from dual;
++----------+
+| abs(-40) |
++----------+
+|       40 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-40) num from dual;
++-----+
+| num |
++-----+
+|  40 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> select abs(-40) num;
++-----+
+| num |
++-----+
+|  40 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> select mod(10,2) from dual;
++-----------+
+| mod(10,2) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select round(100.5654,3) from dual;
++-------------------+
+| round(100.5654,3) |
++-------------------+
+|           100.565 |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> select truncate(100.5694,3) from dual;
++----------------------+
+| truncate(100.5694,3) |
++----------------------+
+|              100.569 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(100.5694,3) from dual;
++-------------------+
+| round(100.5694,3) |
++-------------------+
+|           100.569 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(100.5699,3) from dual;
++-------------------+
+| round(100.5699,3) |
++-------------------+
+|           100.570 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(10.56) from dual;
++-------------+
+| ceil(10.56) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(10.56) from dual;
++--------------+
+| floor(10.56) |
++--------------+
+|           10 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------------+-------+
+| roll | name     | address     | marks |
++------+----------+-------------+-------+
+|   10 | Piyush   | Godda       |   850 |
+|   11 | Nirnay   | Upper Bazar |   950 |
+|   12 | Ritesh   | Lalpur      |   950 |
+|   13 | Prashant | Samlong     |   750 |
+|   14 | Bob      | Kantatoli   |   650 |
+|   15 | Shatak   | 3rd lane    |   650 |
++------+----------+-------------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select upper(name) from student;
++-------------+
+| upper(name) |
++-------------+
+| BOB         |
+| NIRNAY      |
+| PIYUSH      |
+| PRASHANT    |
+| RITESH      |
+| SHATAK      |
++-------------+
+6 rows in set (0.00 sec)
+
+mysql> select name, lenght(name) len from student;
+ERROR 1305 (42000): FUNCTION sb101db.lenght does not exist
+mysql> select name, lenght(name) len from student;
+ERROR 1305 (42000): FUNCTION sb101db.lenght does not exist
+mysql> select name, length(name) len from student;
++----------+-----+
+| name     | len |
++----------+-----+
+| Bob      |   3 |
+| Nirnay   |   6 |
+| Piyush   |   6 |
+| Prashant |   8 |
+| Ritesh   |   6 |
+| Shatak   |   6 |
++----------+-----+
+6 rows in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-10-20 14:51:38 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%m-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%m-%y') |
++-----------------------------------+
+| 20-10-22                          |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(sysdate(),'%d-%M-%y');
++-----------------------------------+
+| date_format(sysdate(),'%d-%M-%y') |
++-----------------------------------+
+| 20-October-22                     |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select adddate(sysdate(),INTERVAL 3 DAY);
++-----------------------------------+
+| adddate(sysdate(),INTERVAL 3 DAY) |
++-----------------------------------+
+| 2022-10-23 14:56:04               |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_sb101db |
++-------------------+
+| a1                |
+| b1                |
+| dept              |
+| emp               |
+| student           |
+| teacher           |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+----------+-------------+-------+
+| roll | name     | address     | marks |
++------+----------+-------------+-------+
+|   10 | Piyush   | Godda       |   850 |
+|   11 | Nirnay   | Upper Bazar |   950 |
+|   12 | Ritesh   | Lalpur      |   950 |
+|   13 | Prashant | Samlong     |   750 |
+|   14 | Bob      | Kantatoli   |   650 |
+|   15 | Shatak   | 3rd lane    |   650 |
++------+----------+-------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select max(marks) from student;
++------------+
+| max(marks) |
++------------+
+|        950 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select sum(marks) from student;
++------------+
+| sum(marks) |
++------------+
+|       4800 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) from student;
++------------+
+| avg(marks) |
++------------+
+|   800.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(marks) from student;
++--------------+
+| count(marks) |
++--------------+
+|            6 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from student;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.02 sec)
+
+mysql> select count(DISTINCT marks) from student;
++-----------------------+
+| count(DISTINCT marks) |
++-----------------------+
+|                     4 |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from emp;
++------+--------+---------+--------+--------+
+| eid  | ename  | address | salary | deptid |
++------+--------+---------+--------+--------+
+| 1000 | ravi   | patna   |  85000 |    200 |
+| 1001 | manoj  | patna   |  85000 |     12 |
+| 1003 | manoj  | patna   |  85000 |     12 |
+| 1005 | Piyush | delhi   |  75000 |   NULL |
+| 1006 | amit   | MP      |  65000 |    200 |
++------+--------+---------+--------+--------+
+5 rows in set (0.01 sec)
+
+mysql> selct * from dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from dept' at line 1
+mysql> select * from dept;
++-----+-----------+----------+
+| did | dname     | location |
++-----+-----------+----------+
+|  12 | Accounts  | Dubai    |
+|  13 | Sales     | Chennai  |
+|  14 | Marketing | Mumbai   |
+| 200 | HR        | kolkata  |
++-----+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into emp value(1007,'taygi','Mumbai',69540,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sb101db`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `dept` (`did`) ON UPDATE CASCADE)
+mysql> insert into emp value(1007,'taygi','Mumbai',69540,12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp value(1008,'tyagi','Pune',678478,200);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp value(1009,'Ritesh','Lalpur',678478,13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp value(1010,'Prashant','ranhi',678478,14);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp;
++------+----------+---------+--------+--------+
+| eid  | ename    | address | salary | deptid |
++------+----------+---------+--------+--------+
+| 1000 | ravi     | patna   |  85000 |    200 |
+| 1001 | manoj    | patna   |  85000 |     12 |
+| 1003 | manoj    | patna   |  85000 |     12 |
+| 1005 | Piyush   | delhi   |  75000 |   NULL |
+| 1006 | amit     | MP      |  65000 |    200 |
+| 1007 | taygi    | Mumbai  |  69540 |     12 |
+| 1008 | tyagi    | Pune    | 678478 |    200 |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 |
+| 1010 | Prashant | ranhi   | 678478 |     14 |
++------+----------+---------+--------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select sum(salary) from emp;
++-------------+
+| sum(salary) |
++-------------+
+|     2499974 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select deptid, sum(salary) from emp group by deptid;
++--------+-------------+
+| deptid | sum(salary) |
++--------+-------------+
+|   NULL |       75000 |
+|     12 |      239540 |
+|     13 |      678478 |
+|     14 |      678478 |
+|    200 |      828478 |
++--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select deptid,min(salary),max(salary),avg(salary), sum(salary) from emp group by deptid;
++--------+-------------+-------------+-------------+-------------+
+| deptid | min(salary) | max(salary) | avg(salary) | sum(salary) |
++--------+-------------+-------------+-------------+-------------+
+|   NULL |       75000 |       75000 |  75000.0000 |       75000 |
+|     12 |       69540 |       85000 |  79846.6667 |      239540 |
+|     13 |      678478 |      678478 | 678478.0000 |      678478 |
+|     14 |      678478 |      678478 | 678478.0000 |      678478 |
+|    200 |       65000 |      678478 | 276159.3333 |      828478 |
++--------+-------------+-------------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select deptid,ename,min(salary),max(salary),avg(salary), sum(salary) from emp group by deptid,ename;
++--------+----------+-------------+-------------+-------------+-------------+
+| deptid | ename    | min(salary) | max(salary) | avg(salary) | sum(salary) |
++--------+----------+-------------+-------------+-------------+-------------+
+|    200 | ravi     |       85000 |       85000 |  85000.0000 |       85000 |
+|     12 | manoj    |       85000 |       85000 |  85000.0000 |      170000 |
+|   NULL | Piyush   |       75000 |       75000 |  75000.0000 |       75000 |
+|    200 | amit     |       65000 |       65000 |  65000.0000 |       65000 |
+|     12 | taygi    |       69540 |       69540 |  69540.0000 |       69540 |
+|    200 | tyagi    |      678478 |      678478 | 678478.0000 |      678478 |
+|     13 | Ritesh   |      678478 |      678478 | 678478.0000 |      678478 |
+|     14 | Prashant |      678478 |      678478 | 678478.0000 |      678478 |
++--------+----------+-------------+-------------+-------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> select deptid,ename,min(salary),max(salary),avg(salary), sum(salary) from emp group by deptid,ename having sum(salary) >80000;
++--------+----------+-------------+-------------+-------------+-------------+
+| deptid | ename    | min(salary) | max(salary) | avg(salary) | sum(salary) |
++--------+----------+-------------+-------------+-------------+-------------+
+|    200 | ravi     |       85000 |       85000 |  85000.0000 |       85000 |
+|     12 | manoj    |       85000 |       85000 |  85000.0000 |      170000 |
+|    200 | tyagi    |      678478 |      678478 | 678478.0000 |      678478 |
+|     13 | Ritesh   |      678478 |      678478 | 678478.0000 |      678478 |
+|     14 | Prashant |      678478 |      678478 | 678478.0000 |      678478 |
++--------+----------+-------------+-------------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select deptid, sum(salary) from emp where deptid IN(10,12,13) group by deptid having sum(salary) > 80000;
++--------+-------------+
+| deptid | sum(salary) |
++--------+-------------+
+|     12 |      239540 |
+|     13 |      678478 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp,dept;
++------+----------+---------+--------+--------+-----+-----------+----------+
+| eid  | ename    | address | salary | deptid | did | dname     | location |
++------+----------+---------+--------+--------+-----+-----------+----------+
+| 1000 | ravi     | patna   |  85000 |    200 | 200 | HR        | kolkata  |
+| 1000 | ravi     | patna   |  85000 |    200 |  14 | Marketing | Mumbai   |
+| 1000 | ravi     | patna   |  85000 |    200 |  13 | Sales     | Chennai  |
+| 1000 | ravi     | patna   |  85000 |    200 |  12 | Accounts  | Dubai    |
+| 1001 | manoj    | patna   |  85000 |     12 | 200 | HR        | kolkata  |
+| 1001 | manoj    | patna   |  85000 |     12 |  14 | Marketing | Mumbai   |
+| 1001 | manoj    | patna   |  85000 |     12 |  13 | Sales     | Chennai  |
+| 1001 | manoj    | patna   |  85000 |     12 |  12 | Accounts  | Dubai    |
+| 1003 | manoj    | patna   |  85000 |     12 | 200 | HR        | kolkata  |
+| 1003 | manoj    | patna   |  85000 |     12 |  14 | Marketing | Mumbai   |
+| 1003 | manoj    | patna   |  85000 |     12 |  13 | Sales     | Chennai  |
+| 1003 | manoj    | patna   |  85000 |     12 |  12 | Accounts  | Dubai    |
+| 1005 | Piyush   | delhi   |  75000 |   NULL | 200 | HR        | kolkata  |
+| 1005 | Piyush   | delhi   |  75000 |   NULL |  14 | Marketing | Mumbai   |
+| 1005 | Piyush   | delhi   |  75000 |   NULL |  13 | Sales     | Chennai  |
+| 1005 | Piyush   | delhi   |  75000 |   NULL |  12 | Accounts  | Dubai    |
+| 1006 | amit     | MP      |  65000 |    200 | 200 | HR        | kolkata  |
+| 1006 | amit     | MP      |  65000 |    200 |  14 | Marketing | Mumbai   |
+| 1006 | amit     | MP      |  65000 |    200 |  13 | Sales     | Chennai  |
+| 1006 | amit     | MP      |  65000 |    200 |  12 | Accounts  | Dubai    |
+| 1007 | taygi    | Mumbai  |  69540 |     12 | 200 | HR        | kolkata  |
+| 1007 | taygi    | Mumbai  |  69540 |     12 |  14 | Marketing | Mumbai   |
+| 1007 | taygi    | Mumbai  |  69540 |     12 |  13 | Sales     | Chennai  |
+| 1007 | taygi    | Mumbai  |  69540 |     12 |  12 | Accounts  | Dubai    |
+| 1008 | tyagi    | Pune    | 678478 |    200 | 200 | HR        | kolkata  |
+| 1008 | tyagi    | Pune    | 678478 |    200 |  14 | Marketing | Mumbai   |
+| 1008 | tyagi    | Pune    | 678478 |    200 |  13 | Sales     | Chennai  |
+| 1008 | tyagi    | Pune    | 678478 |    200 |  12 | Accounts  | Dubai    |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 | 200 | HR        | kolkata  |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 |  14 | Marketing | Mumbai   |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 |  13 | Sales     | Chennai  |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 |  12 | Accounts  | Dubai    |
+| 1010 | Prashant | ranhi   | 678478 |     14 | 200 | HR        | kolkata  |
+| 1010 | Prashant | ranhi   | 678478 |     14 |  14 | Marketing | Mumbai   |
+| 1010 | Prashant | ranhi   | 678478 |     14 |  13 | Sales     | Chennai  |
+| 1010 | Prashant | ranhi   | 678478 |     14 |  12 | Accounts  | Dubai    |
++------+----------+---------+--------+--------+-----+-----------+----------+
+36 rows in set (0.01 sec)
+
+mysql> select * from dept inner join emp on dept.did = emp.deptid;
++-----+-----------+----------+------+----------+---------+--------+--------+
+| did | dname     | location | eid  | ename    | address | salary | deptid |
++-----+-----------+----------+------+----------+---------+--------+--------+
+|  12 | Accounts  | Dubai    | 1001 | manoj    | patna   |  85000 |     12 |
+|  12 | Accounts  | Dubai    | 1003 | manoj    | patna   |  85000 |     12 |
+|  12 | Accounts  | Dubai    | 1007 | taygi    | Mumbai  |  69540 |     12 |
+|  13 | Sales     | Chennai  | 1009 | Ritesh   | Lalpur  | 678478 |     13 |
+|  14 | Marketing | Mumbai   | 1010 | Prashant | ranhi   | 678478 |     14 |
+| 200 | HR        | kolkata  | 1000 | ravi     | patna   |  85000 |    200 |
+| 200 | HR        | kolkata  | 1006 | amit     | MP      |  65000 |    200 |
+| 200 | HR        | kolkata  | 1008 | tyagi    | Pune    | 678478 |    200 |
++-----+-----------+----------+------+----------+---------+--------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,address,salary from dept INNER JOIN emp ON dept.did = emp.deptid and dept.dname = 'HR';
++------+-------+---------+--------+
+| eid  | ename | address | salary |
++------+-------+---------+--------+
+| 1000 | ravi  | patna   |  85000 |
+| 1006 | amit  | MP      |  65000 |
+| 1008 | tyagi | Pune    | 678478 |
++------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select eid,ename,address,salary from dept INNER JOIN emp ON dept.dname = 'HR';
++------+----------+---------+--------+
+| eid  | ename    | address | salary |
++------+----------+---------+--------+
+| 1000 | ravi     | patna   |  85000 |
+| 1001 | manoj    | patna   |  85000 |
+| 1003 | manoj    | patna   |  85000 |
+| 1005 | Piyush   | delhi   |  75000 |
+| 1006 | amit     | MP      |  65000 |
+| 1007 | taygi    | Mumbai  |  69540 |
+| 1008 | tyagi    | Pune    | 678478 |
+| 1009 | Ritesh   | Lalpur  | 678478 |
+| 1010 | Prashant | ranhi   | 678478 |
++------+----------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select e.eid,e.ename,e.address,e.salary from dept d INNER JOIN emp e ON d.did = e.deptid and d.dname = 'HR';
++------+-------+---------+--------+
+| eid  | ename | address | salary |
++------+-------+---------+--------+
+| 1000 | ravi  | patna   |  85000 |
+| 1006 | amit  | MP      |  65000 |
+| 1008 | tyagi | Pune    | 678478 |
++------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp;
++------+----------+---------+--------+--------+
+| eid  | ename    | address | salary | deptid |
++------+----------+---------+--------+--------+
+| 1000 | ravi     | patna   |  85000 |    200 |
+| 1001 | manoj    | patna   |  85000 |     12 |
+| 1003 | manoj    | patna   |  85000 |     12 |
+| 1005 | Piyush   | delhi   |  75000 |   NULL |
+| 1006 | amit     | MP      |  65000 |    200 |
+| 1007 | taygi    | Mumbai  |  69540 |     12 |
+| 1008 | tyagi    | Pune    | 678478 |    200 |
+| 1009 | Ritesh   | Lalpur  | 678478 |     13 |
+| 1010 | Prashant | ranhi   | 678478 |     14 |
++------+----------+---------+--------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-----------+----------+
+| did | dname     | location |
++-----+-----------+----------+
+|  12 | Accounts  | Dubai    |
+|  13 | Sales     | Chennai  |
+|  14 | Marketing | Mumbai   |
+| 200 | HR        | kolkata  |
++-----+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select e.eid,e.ename,e.address,e.salary from dept d INNER JOIN emp e Where d.did = e.deptid and d.dname = 'HR';
++------+-------+---------+--------+
+| eid  | ename | address | salary |
++------+-------+---------+--------+
+| 1000 | ravi  | patna   |  85000 |
+| 1006 | amit  | MP      |  65000 |
+| 1008 | tyagi | Pune    | 678478 |
++------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select e.eid,e.ename,e.address,e.salary from dept d left outer join emp e on d.did = e.deptid;
++------+----------+---------+--------+
+| eid  | ename    | address | salary |
++------+----------+---------+--------+
+| 1001 | manoj    | patna   |  85000 |
+| 1003 | manoj    | patna   |  85000 |
+| 1007 | taygi    | Mumbai  |  69540 |
+| 1009 | Ritesh   | Lalpur  | 678478 |
+| 1010 | Prashant | ranhi   | 678478 |
+| 1000 | ravi     | patna   |  85000 |
+| 1006 | amit     | MP      |  65000 |
+| 1008 | tyagi    | Pune    | 678478 |
++------+----------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql>
